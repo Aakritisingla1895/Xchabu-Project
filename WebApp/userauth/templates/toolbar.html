@@ -1,0 +1,959 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block navbar %}
+{% load mathfilters %}
+<div class="brandlogo">
+  <img src="{% static 'xchabu.png'%}" alt="logo" style="height: 50px; width: 50px;"/>
+</div>
+<ul style="padding-left: 65%;" >
+<li><a>{{date|time:"H:i:s"}}</a></li>
+{% for data in  udata %}
+<li><a href="#">Hello ,{{data.name}}</a></li>
+{% endfor %}
+<li ><a href="/logout">Logout</a></li>
+<li><a href = "/dash_bord">Return to main </a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+
+<style>
+  .sidebar{
+    background-color:#203864;
+    height: 100vh;
+    position: sticky !important;
+    top: 0 !important;
+    left: 0%;
+    border-right: 2px solid orangered;
+  }
+  h4{
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    padding-top: 5%;
+    
+  }
+  .icon{
+    left: 15px;
+    position: absolute;
+    font-size: 25px;
+    width: 40px;
+    height: 38px;
+    padding-left: 8px;
+    background-color: orangered;
+  }
+  .form-control{
+    padding-left: 30%;
+  }
+  .amenities i{
+    font-size: 20px;
+    color: orangered;
+  }
+  .amenities{
+    font-size: 20px;
+    color: white;
+  }
+  .left{
+    padding-left: 12px;
+    color: white;
+  }
+  .right{
+    padding-left: 40px;
+    color: white;
+  }
+
+ .btn{
+    background-color: orangered;
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+    margin-bottom: 5%;
+  }
+  .form-check {
+    color: white;
+  }
+  .hr{
+    background-color: orangered;
+  }
+  .imagediv{
+    margin-left: 17%;
+    margin-top: 2%;
+  }
+  .row{
+    margin-top: 3px;
+  }
+  .card-image{
+    margin-left:15%;
+    width: 250px;
+  }
+  #textbox i{
+    font-size: 25px;
+    color: orangered;
+    padding-top: 8px;
+    margin-left: 2px;
+    padding-left: 8px;
+  }
+  #textbox input{
+    width: 100px;
+  }
+  .double{
+        /* border: 2px solid navy; */
+        margin-left:230px;
+        margin-top:3%;
+        border-style: double;
+        border-width: 8px;
+        border-color: black;
+
+    }
+    rect{
+        fill: none;
+        stroke-width:1;
+        stroke:rgb(0,0,0);
+        
+    }
+    .svgdiv{
+      margin-left: 30%;
+      margin-top: 2%;
+    }
+    #svgrow:after {
+    content: "";
+    display: table;
+    clear: both;
+   }
+   
+
+/* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+      
+    }
+  }
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #f1f1f1;
+  margin-left: 20%;
+  left: 50%;
+  padding-top: 5%;
+  padding-left: 2%;
+  padding-right: 1%;
+  margin-bottom: 5%;
+}
+.cardhr{
+  background-color: black;
+}
+#door{
+  fill: white;
+  stroke: white;
+}
+.dropdown{
+  margin-left:80%;
+  margin-top:3%;
+}
+.dropdown-menu a{
+  background-color:none;
+}
+
+/* Slideshow container */
+.carousel {
+  width: 500px;
+  height: 300px;
+  position: relative;
+  margin: auto;
+  padding-bottom: 20%;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  padding-top: 5%;
+  padding-right: 33%;
+
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+</style>
+<div class="row">
+  <div class="col-3 sidebar">
+    <h4>Create project</h4>
+    <hr class="hr">
+    <form  method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="icon"><i class="fa fa-home"  aria-hidden="true"></i></label>
+      
+        <select  class="form-control" name="firstname" >
+          {% for p in data1 %}
+          <option value="{{p.firstname}}" >{{p.firstname}}</option>
+          {% endfor %}
+          <option>1 BHK</option>
+          <option >2 BHK</option>
+          <option >3 BHK</option>
+          <option >4 BHK</option>
+          <option >5 BHK</option>
+          
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="icon"><i class="fa fa-building" aria-hidden="true"></i></label>
+        <select class="form-control"name="ftype" >
+          {% for p in data1 %}
+          <option value="{{p.ftype}}">{{p.ftype}}</option>
+          {% endfor %}
+          <option>1 Floor</option>
+          <option>2 Floor</option>
+          <option>3 Floor</option>
+          <option>4 Floor</option>
+          <option>5 Floor</option>
+          </select>
+        
+         </div>
+      <div class="form-group">
+      <label class="icon"><i class="fa fa-exchange" aria-hidden="true"></i></label>
+      <select class="form-control"name="direction" >
+        {% for p in data1 %}
+        <option value="{{p.direction}}" >{{p.direction}}</option>
+        {% endfor %}
+        <option>East </option>
+        <option>West</option>
+        <option>North</option>
+        <option>South</option>
+        </select>
+        
+        </div>
+        {% for p in data1 %}
+        <div class="row" id="textbox">
+          <i class="fa fa-cubes" aria-hidden="true"></i>
+          <div class="col-4">
+            <input type="text" class="form-control" name="height" value="{{p.height}}">
+          </div>
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <div class="col-4">
+            <input type="text" class="form-control" name="width" value="{{p.width}}">
+          </div>
+        </div>
+        {% endfor %}
+        
+      
+      <br/>
+      <label class="amenities"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Vastu</label><br/>        
+      <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" name="yes" checked="checked" value="True">
+          <label class="form-check-label" for="gender">Yes</label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" name="no"  value="True">
+          <label class="form-check-label" for="gender">No</label>
+        </div>
+      <br/>
+      
+      <label class="amenities"> <i class="fa fa-bath" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Amenities</label>
+      <div class="row" >
+        <div class="left">
+            
+          <input type="checkbox" name="ots" {{ots}} value="True">
+          <label for="amenities"> OTS</label><br>
+          <input type="checkbox" name="store" {{store}} value="True">
+          <label for="amenities">Store</label><br>
+          <input type="checkbox" name="garden" {{garden}} value="True" >
+          <label for="amenities">Garden</label><br>
+          <input type="checkbox" name="temple" {{temple}} value="True" >
+          <label for="amenities"> Temple</label><br><br>
+        
+        </div>
+        
+        
+        <div class="right">
+         
+          <input type="checkbox" name="parking" {{parking}} value="True">
+          <label for="amenities"> Parking</label><br>
+          <input type="checkbox" name="washarea" {{washarea}} value="True">
+          <label for="amenities"> wash Area</label><br>
+          <input type="checkbox" name="dressingroom"  {{dressingroom}} value="True" >
+          <label for="amenities"> Dressing room</label><br>
+          
+          <input type="checkbox" name="utility" {{utility}} value="True" >
+          
+          <label for="amenities"> Utility</label><br><br>
+         
+        </div>
+      </div>
+        <button type="submit" class="btn">Update Project</button>
+        
+    </form>
+  </div>
+  <div class="col-9">  
+    {% if messages %}
+      {% for msg in messages %}
+      <p class="text-danger text-center" style="padding-right: 15%;">{{msg}}</p>
+      {% endfor %}
+      {% endif %}
+      <div class="svgdiv" id="app" >
+        <div class="dropdown">
+          <a href="{% url 'layout_download' %}" @click="downloadSVG($event)" class='btn btn-secondary dropdown-toggle'>Save as </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">PDF</a>
+        <a  href="#" @click="downloadSVG($event)" class="link-download btn  btn-sm dropdown-item">Autocad</a>
+      </div>
+    </div>
+    <div class="text-block">
+      {% for l in data1 %}
+        <p>{{l.direction}} Direction Layout 20X40</p>
+        {% endfor %}
+    </div>
+        
+        <svg id="dynamicIllustration" version="1.1" width="320" height="480" viewBox="0 0 320 450" xmlns="http://www.w3.org/2000/svg">
+        <rect x={{bedx}} y={{bedy}} width={{bedw}} height={{bedl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);" ></rect>
+        <rect x={{kitx}} y={{kity}} width={{kitw}} height={{kitl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{toix}} y={{toiy}} width={{toiw}} height={{toil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{drawx}} y={{drawy}} width={{draww}} height={{drawl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{stax}} y={{stay}} width={{staw}} height={{stal}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{dinx}} y={{diny}} width={{dinw}} height={{dinl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{ctoix}} y={{ctoiy}} width={{ctoiw}} height={{ctoil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{otsx}} y={{otsy}} width={{otsw}} height={{otsl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{washx}} y={{washy}} width={{washw}} height={{washl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{entx}} y={{enty}} width={{entw}} height={{entl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{parx}} y={{pary}} width={{parw}} height={{parl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{garx}} y={{gary}} width={{garw}} height={{garl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{foyx}} y={{foyy}} width={{foyw}} height={{foyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{utix}} y={{utiy}} width={{utiw}} height={{util}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{stox}} y={{stoy}} width={{stow}} height={{stol}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{sto2x}} y={{sto2y}} width={{sto2w}} height={{sto2l}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{bed2x}} y={{bed2y}} width={{bed2w}} height={{bed2yl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x={{emptyx}} y={{emptyy}} width={{emptyw}} height={{emptyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+        <rect x ={{ots2l}} y={{ots2w}} width={{ots2x}} height={{ots2y}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+
+        <!-- Naming coordinates -->
+        <text x={{bedx|add:10}} y={{bed_yco|add:10}} style="font-size:14px;" fill="black">Bedroom</text>
+        <text x={{kitx|add:10}} y={{kit_yco|add:10}} style="font-size:14px;" fill="black">Kitchen</text>
+        <text x={{toix|add:10}} y={{toi_yco|add:10}} style="font-size:14px;"fill="black">Toilet</text> 
+        <text x={{drawx|add:10}} y={{draw_yco|add:10}} style="font-size:14px;" fill="black">Drawing</text>
+        <text x={{stax|add:10}} y={{sta_yco|add:10}} style="font-size:14px;"  fill="black">Stairs</text>
+        <text x={{washx|add:10}} y={{wash_yco|add:10}} style="font-size:14px;" fill="{{wash_fill}}">Wash</text>
+        <text x={{dinx|add:10}} y={{din_yco|add:10}} style="font-size:14px;" fill="{{din_fill}}">Dining</text>
+        <text x={{ctoix|add:10}} y={{ctoi_yco|add:10}} style="font-size:14px;" fill="{{ctoi_fill}}">Toilet</text>
+        <text x={{stox|add:10}} y={{sto_yco|add:10}} style="font-size:14px;" fill="{{sto_fill}}">Store</text>
+        <text x={{otsx|add:10}} y={{ots_yco|add:10}}  style="font-size:14px;" fill="{{ots_fill}}">Ots</text>
+        <text x={{parx|add:10}} y={{par_yco|add:10}} style="font-size:14px;" fill="{{par_fill}}">Parking</text>
+        <text x={{garx|add:10}} y={{gar_yco|add:10}} style="font-size:14px;" fill="{{gar_fill}}">Garden</text>
+        <text x={{foyx|add:10}} y={{foy_yco|add:10}}  style="font-size:14px;" fill="{{foy_fill}}">Foyer</text>
+        <text x={{utix|add:10}} y={{uti_yco|add:10}} style="font-size:14px;" fill="{{uti_fill}}">Utility</text>
+        <text x={{sto2x|add:10}} y={{sto2_yco|add:10}} style="font-size:14px;" fill="{{sto2_fill}}">2Store</text>
+        <text x={{ots2x|add:10}} y={{ots2_yco|add:10}} style="font-size:14px;"  fill="{{ots2_fill}}">2Ots</text>
+        <text x={{bed2x|add:10}} y={{bed2_yco|add:10}} style="font-size:14px;" fill="{{bed2_fill}}">Bedroom</text>
+        <text x={{entx|add:10}} y={{ent_yco|add:10}} style="font-size:14px;" fill="{{ent_fill}}">Entry</text>
+        
+        <!-- Text coordinates for length -->
+        <text x={{bedx|add:10}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedl|div:10}}</text>
+        <text x={{kitx|add:10}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitl|div:10}}</text>
+        <text x={{toix|add:10}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toil|div:10}}</text>
+        <text x={{drawx|add:10}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{drawl|div:10}}</text>
+        <text x={{stax|add:10}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{stal|div:10}}</text>
+        <text x={{washx|add:10}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washl|div:10}}</text>
+        <text x={{dinx|add:10}} y={{din_yco|add:25}} style="font-size:11px;" fill="{{din_fill}}">{{dinl|div:10}}</text>
+        <text x={{ctoix|add:10}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoil|div:10}}</text>
+        <text x={{stox|add:10}} y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">{{stol|div:10}}</text>
+        <text x={{otsx|add:10}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsl|div:10}}</text>
+        <text x={{parx|add:10}} y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">{{parl|div:10}}</text>
+        <text x={{garx|add:10}} y={{gar_yco|add:25}} style="font-size:11px;"  fill="{{gar_fill}}">{{garl|div:10}}</text>
+        <text x={{foyx|add:10}} y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyl|div:10}}</text>
+        <text x={{utix|add:10}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{util|div:10}}</text>
+        <text x={{sto2x|add:10}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2l|div:10}}</text>
+        <text x={{ots2x|add:10}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2l|div:10}}</text>
+        <text x={{bed2x|add:10}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yl|div:10}}</text>
+        <text x={{entx|add:10}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entl|div:10}}</text>
+        
+        
+        <!-- X symbol -->
+        <text x={{bedx|add:32}} y={{bed_yco|add:25}}  style="font-size:11px;"  fill="black">X</text>
+        <text x={{kitx|add:32}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+        <text x={{toix|add:32}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+        <text x={{drawx|add:32}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+        <text x={{stax|add:32}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+        <text x={{washx|add:32}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">X</text>
+        <text x={{dinx|add:32}} y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">X</text>
+        <text x={{ctoix|add:32}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">X</text>
+        <text x={{stox|add:32}}  y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">X</text>
+        <text x={{otsx|add:32}} y={{ots_yco|add:25}}   style="font-size:11px;" fill="{{ots_fill}}">X</text>
+        <text x={{parx|add:32}}  y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">X</text>
+        <text x={{garx|add:32}}  y={{gar_yco|add:25}} style="font-size:11px;" fill="{{gar_fill}}">X</text>
+        <text x={{foyx|add:32}} y={{foy_yco|add:25}}  style="font-size:11px;" fill="{{foy_fill}}">X</text>
+        <text x={{utix|add:32}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">X</text>
+        <text x={{sto2x|add:32}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">X</text>
+        <text x={{ots2x|add:32}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">X</text>
+        <text x={{bed2x|add:32}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">X</text>
+        <text x={{entx|add:32}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">X</text>
+
+    
+        <!-- coordinates for width -->
+        <text x={{bedx|add:40}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedw|div:10}}</text>
+        <text x={{kitx|add:40}}  y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitw|div:10}}</text>
+        <text x={{toix|add:40}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toiw|div:10}}</text>
+        <text x={{drawx|add:40}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{draww|div:10}}</text>
+        <text x={{stax|add:40}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{staw|div:10}}</text>
+        <text x={{washx|add:40}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washw|div:10}}</text>
+        <text x={{dinx|add:40}}  y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">{{dinw|div:10}}</text>
+        <text x={{ctoix|add:40}}  y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoiw|div:10}}</text>
+        <text x={{stox|add:40}}  y={{sto_yco|add:25}} style="font-size:11px;"fill="{{sto_fill}}">{{stow|div:10}}</text>
+        <text x={{otsx|add:40}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsw|div:10}}</text>
+        <text x={{parx|add:40}} y={{par_yco|add:25}}  style="font-size:11px;"fill="{{par_fill}}">{{parw|div:10}}</text>
+        <text x={{garx|add:40}}  y={{gar_yco|add:25}}  style="font-size:11px;" fill="{{gar_fill}}">{{garw|div:10}}</text>
+        <text x={{foyx|add:40}}  y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyw|div:10}}</text>
+        <text x={{utix|add:40}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{utiw|div:10}}</text>
+        <text x={{sto2x|add:40}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2w|div:10}}</text>
+        <text x={{ots2x|add:40}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2w|div:10}}</text>
+        <text x={{bed2x|add:40}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yw|div:10}}</text>
+        <text x={{entx|add:40}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entw|div:10}}</text>
+
+      </svg>
+
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#myCarousel" data-slide-to="4"></li>
+          <li data-target="#myCarousel" data-slide-to="5"></li>
+        </ol>
+        
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          {% for p in posts %}
+          {% if forloop.counter == 1 %}
+          <div class="item active">
+          {% else %}
+          <div class="item">
+          {% endif %}
+          <img src="{{ p.headimage.url }}" alt="Image" width="460" height="345">
+          <div class="carousel-caption">
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.teaser }}</p>
+          </div>
+            </div>
+            {% endfor %}
+            </div>
+        
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+      </div>
+      
+<script>
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
+
+new Vue({
+  el: '#app',
+  data: {
+    radius: 10
+  },
+  methods: {
+    downloadSVG(evt) {
+
+      // document.querySelector(".link-download").addEventListener("click", (evt) => {
+      const svgContent = document.getElementById("dynamicIllustration").outerHTML,
+        blob = new Blob([svgContent], {
+          type: "image/svg+xml"
+        }),
+        url = window.URL.createObjectURL(blob),
+        link = evt.target;
+
+      link.target = "_blank";
+      link.download = "layout.dwg";
+      link.href = url;
+      // });
+
+    }
+
+  }
+
+});
+</script>
+
+
+</div>
+
+<hr class="cardhr"/>
+
+
+<div class="row" id="svgrow">
+  <div class="carousel">
+
+    <p style="text-align:center;"> SUGGESTED LAYOUTS</p>
+
+    <div class="mySlides">
+      <div class="numbertext">1 / 3</div>
+        <div class="container" style="width: 100px; height: 100px;">
+          <svg id="dynamicIllustration" version="1.1" width="300" height="270"" viewBox="0 0 320 450" xmlns="http://www.w3.org/2000/svg">
+            <rect x={{bedx}} y={{bedy}} width={{bedw}} height={{bedl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);" ></rect>
+            <rect x={{kitx}} y={{kity}} width={{kitw}} height={{kitl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{toix}} y={{toiy}} width={{toiw}} height={{toil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{drawx}} y={{drawy}} width={{draww}} height={{drawl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{stax}} y={{stay}} width={{staw}} height={{stal}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{dinx}} y={{diny}} width={{dinw}} height={{dinl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{ctoix}} y={{ctoiy}} width={{ctoiw}} height={{ctoil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{otsx}} y={{otsy}} width={{otsw}} height={{otsl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{washx}} y={{washy}} width={{washw}} height={{washl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{entx}} y={{enty}} width={{entw}} height={{entl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{parx}} y={{pary}} width={{parw}} height={{parl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{garx}} y={{gary}} width={{garw}} height={{garl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{foyx}} y={{foyy}} width={{foyw}} height={{foyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{utix}} y={{utiy}} width={{utiw}} height={{util}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{stox}} y={{stoy}} width={{stow}} height={{stol}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{sto2x}} y={{sto2y}} width={{sto2w}} height={{sto2l}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{bed2x}} y={{bed2y}} width={{bed2w}} height={{bed2yl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x={{emptyx}} y={{emptyy}} width={{emptyw}} height={{emptyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+            <rect x ={{ots2l}} y={{ots2w}} width={{ots2x}} height={{ots2y}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+    
+            <!-- Naming coordinates -->
+            <text x={{bedx|add:10}} y={{bed_yco|add:10}} style="font-size:14px;" fill="black">Bedroom</text>
+            <text x={{kitx|add:10}} y={{kit_yco|add:10}} style="font-size:14px;" fill="black">Kitchen</text>
+            <text x={{toix|add:10}} y={{toi_yco|add:10}} style="font-size:14px;"fill="black">Toilet</text> 
+            <text x={{drawx|add:10}} y={{draw_yco|add:10}} style="font-size:14px;" fill="black">Drawing</text>
+            <text x={{stax|add:10}} y={{sta_yco|add:10}} style="font-size:14px;"  fill="black">Stairs</text>
+            <text x={{washx|add:10}} y={{wash_yco|add:10}} style="font-size:14px;" fill="{{wash_fill}}">Wash</text>
+            <text x={{dinx|add:10}} y={{din_yco|add:10}} style="font-size:14px;" fill="{{din_fill}}">Dining</text>
+            <text x={{ctoix|add:10}} y={{ctoi_yco|add:10}} style="font-size:14px;" fill="{{ctoi_fill}}">Toilet</text>
+            <text x={{stox|add:10}} y={{sto_yco|add:10}} style="font-size:14px;" fill="{{sto_fill}}">Store</text>
+            <text x={{otsx|add:10}} y={{ots_yco|add:10}}  style="font-size:14px;" fill="{{ots_fill}}">Ots</text>
+            <text x={{parx|add:10}} y={{par_yco|add:10}} style="font-size:14px;" fill="{{par_fill}}">Parking</text>
+            <text x={{garx|add:10}} y={{gar_yco|add:10}} style="font-size:14px;" fill="{{gar_fill}}">Garden</text>
+            <text x={{foyx|add:10}} y={{foy_yco|add:10}}  style="font-size:14px;" fill="{{foy_fill}}">Foyer</text>
+            <text x={{utix|add:10}} y={{uti_yco|add:10}} style="font-size:14px;" fill="{{uti_fill}}">Utility</text>
+            <text x={{sto2x|add:10}} y={{sto2_yco|add:10}} style="font-size:14px;" fill="{{sto2_fill}}">2Store</text>
+            <text x={{ots2x|add:10}} y={{ots2_yco|add:10}} style="font-size:14px;"  fill="{{ots2_fill}}">2Ots</text>
+            <text x={{bed2x|add:10}} y={{bed2_yco|add:10}} style="font-size:14px;" fill="{{bed2_fill}}">Bedroom</text>
+            <text x={{entx|add:10}} y={{ent_yco|add:10}} style="font-size:14px;" fill="{{ent_fill}}">Entry</text>
+            
+            <!-- Text coordinates for length -->
+            <text x={{bedx|add:10}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedl|div:10}}</text>
+            <text x={{kitx|add:10}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitl|div:10}}</text>
+            <text x={{toix|add:10}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toil|div:10}}</text>
+            <text x={{drawx|add:10}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{drawl|div:10}}</text>
+            <text x={{stax|add:10}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{stal|div:10}}</text>
+            <text x={{washx|add:10}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washl|div:10}}</text>
+            <text x={{dinx|add:10}} y={{din_yco|add:25}} style="font-size:11px;" fill="{{din_fill}}">{{dinl|div:10}}</text>
+            <text x={{ctoix|add:10}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoil|div:10}}</text>
+            <text x={{stox|add:10}} y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">{{stol|div:10}}</text>
+            <text x={{otsx|add:10}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsl|div:10}}</text>
+            <text x={{parx|add:10}} y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">{{parl|div:10}}</text>
+            <text x={{garx|add:10}} y={{gar_yco|add:25}} style="font-size:11px;"  fill="{{gar_fill}}">{{garl|div:10}}</text>
+            <text x={{foyx|add:10}} y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyl|div:10}}</text>
+            <text x={{utix|add:10}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{util|div:10}}</text>
+            <text x={{sto2x|add:10}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2l|div:10}}</text>
+            <text x={{ots2x|add:10}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2l|div:10}}</text>
+            <text x={{bed2x|add:10}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yl|div:10}}</text>
+            <text x={{entx|add:10}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entl|div:10}}</text>
+            
+            
+            <!-- X symbol -->
+            <text x={{bedx|add:32}} y={{bed_yco|add:25}}  style="font-size:11px;"  fill="black">X</text>
+            <text x={{kitx|add:32}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+            <text x={{toix|add:32}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+            <text x={{drawx|add:32}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+            <text x={{stax|add:32}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+            <text x={{washx|add:32}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">X</text>
+            <text x={{dinx|add:32}} y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">X</text>
+            <text x={{ctoix|add:32}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">X</text>
+            <text x={{stox|add:32}}  y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">X</text>
+            <text x={{otsx|add:32}} y={{ots_yco|add:25}}   style="font-size:11px;" fill="{{ots_fill}}">X</text>
+            <text x={{parx|add:32}}  y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">X</text>
+            <text x={{garx|add:32}}  y={{gar_yco|add:25}} style="font-size:11px;" fill="{{gar_fill}}">X</text>
+            <text x={{foyx|add:32}} y={{foy_yco|add:25}}  style="font-size:11px;" fill="{{foy_fill}}">X</text>
+            <text x={{utix|add:32}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">X</text>
+            <text x={{sto2x|add:32}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">X</text>
+            <text x={{ots2x|add:32}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">X</text>
+            <text x={{bed2x|add:32}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">X</text>
+            <text x={{entx|add:32}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">X</text>
+    
+        
+            <!-- coordinates for width -->
+            <text x={{bedx|add:40}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedw|div:10}}</text>
+            <text x={{kitx|add:40}}  y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitw|div:10}}</text>
+            <text x={{toix|add:40}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toiw|div:10}}</text>
+            <text x={{drawx|add:40}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{draww|div:10}}</text>
+            <text x={{stax|add:40}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{staw|div:10}}</text>
+            <text x={{washx|add:40}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washw|div:10}}</text>
+            <text x={{dinx|add:40}}  y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">{{dinw|div:10}}</text>
+            <text x={{ctoix|add:40}}  y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoiw|div:10}}</text>
+            <text x={{stox|add:40}}  y={{sto_yco|add:25}} style="font-size:11px;"fill="{{sto_fill}}">{{stow|div:10}}</text>
+            <text x={{otsx|add:40}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsw|div:10}}</text>
+            <text x={{parx|add:40}} y={{par_yco|add:25}}  style="font-size:11px;"fill="{{par_fill}}">{{parw|div:10}}</text>
+            <text x={{garx|add:40}}  y={{gar_yco|add:25}}  style="font-size:11px;" fill="{{gar_fill}}">{{garw|div:10}}</text>
+            <text x={{foyx|add:40}}  y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyw|div:10}}</text>
+            <text x={{utix|add:40}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{utiw|div:10}}</text>
+            <text x={{sto2x|add:40}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2w|div:10}}</text>
+            <text x={{ots2x|add:40}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2w|div:10}}</text>
+            <text x={{bed2x|add:40}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yw|div:10}}</text>
+            <text x={{entx|add:40}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entw|div:10}}</text>
+    
+          </svg>
+        </div>
+
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">2 / 3</div>
+      <div class="container" style="width: 100px; height: 100px;">
+        <svg id="dynamicIllustration" version="1.1" width="300" height="270"" viewBox="0 0 320 450" xmlns="http://www.w3.org/2000/svg">
+          <rect x={{bedx}} y={{bedy}} width={{bedw}} height={{bedl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);" ></rect>
+          <rect x={{kitx}} y={{kity}} width={{kitw}} height={{kitl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{toix}} y={{toiy}} width={{toiw}} height={{toil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{drawx}} y={{drawy}} width={{draww}} height={{drawl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{stax}} y={{stay}} width={{staw}} height={{stal}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{dinx}} y={{diny}} width={{dinw}} height={{dinl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{ctoix}} y={{ctoiy}} width={{ctoiw}} height={{ctoil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{otsx}} y={{otsy}} width={{otsw}} height={{otsl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{washx}} y={{washy}} width={{washw}} height={{washl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{entx}} y={{enty}} width={{entw}} height={{entl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{parx}} y={{pary}} width={{parw}} height={{parl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{garx}} y={{gary}} width={{garw}} height={{garl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{foyx}} y={{foyy}} width={{foyw}} height={{foyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{utix}} y={{utiy}} width={{utiw}} height={{util}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{stox}} y={{stoy}} width={{stow}} height={{stol}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{sto2x}} y={{sto2y}} width={{sto2w}} height={{sto2l}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{bed2x}} y={{bed2y}} width={{bed2w}} height={{bed2yl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{emptyx}} y={{emptyy}} width={{emptyw}} height={{emptyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x ={{ots2l}} y={{ots2w}} width={{ots2x}} height={{ots2y}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+  
+          <!-- Naming coordinates -->
+          <text x={{bedx|add:10}} y={{bed_yco|add:10}} style="font-size:14px;" fill="black">Bedroom</text>
+          <text x={{kitx|add:10}} y={{kit_yco|add:10}} style="font-size:14px;" fill="black">Kitchen</text>
+          <text x={{toix|add:10}} y={{toi_yco|add:10}} style="font-size:14px;"fill="black">Toilet</text> 
+          <text x={{drawx|add:10}} y={{draw_yco|add:10}} style="font-size:14px;" fill="black">Drawing</text>
+          <text x={{stax|add:10}} y={{sta_yco|add:10}} style="font-size:14px;"  fill="black">Stairs</text>
+          <text x={{washx|add:10}} y={{wash_yco|add:10}} style="font-size:14px;" fill="{{wash_fill}}">Wash</text>
+          <text x={{dinx|add:10}} y={{din_yco|add:10}} style="font-size:14px;" fill="{{din_fill}}">Dining</text>
+          <text x={{ctoix|add:10}} y={{ctoi_yco|add:10}} style="font-size:14px;" fill="{{ctoi_fill}}">Toilet</text>
+          <text x={{stox|add:10}} y={{sto_yco|add:10}} style="font-size:14px;" fill="{{sto_fill}}">Store</text>
+          <text x={{otsx|add:10}} y={{ots_yco|add:10}}  style="font-size:14px;" fill="{{ots_fill}}">Ots</text>
+          <text x={{parx|add:10}} y={{par_yco|add:10}} style="font-size:14px;" fill="{{par_fill}}">Parking</text>
+          <text x={{garx|add:10}} y={{gar_yco|add:10}} style="font-size:14px;" fill="{{gar_fill}}">Garden</text>
+          <text x={{foyx|add:10}} y={{foy_yco|add:10}}  style="font-size:14px;" fill="{{foy_fill}}">Foyer</text>
+          <text x={{utix|add:10}} y={{uti_yco|add:10}} style="font-size:14px;" fill="{{uti_fill}}">Utility</text>
+          <text x={{sto2x|add:10}} y={{sto2_yco|add:10}} style="font-size:14px;" fill="{{sto2_fill}}">2Store</text>
+          <text x={{ots2x|add:10}} y={{ots2_yco|add:10}} style="font-size:14px;"  fill="{{ots2_fill}}">2Ots</text>
+          <text x={{bed2x|add:10}} y={{bed2_yco|add:10}} style="font-size:14px;" fill="{{bed2_fill}}">Bedroom</text>
+          <text x={{entx|add:10}} y={{ent_yco|add:10}} style="font-size:14px;" fill="{{ent_fill}}">Entry</text>
+          
+          <!-- Text coordinates for length -->
+          <text x={{bedx|add:10}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedl|div:10}}</text>
+          <text x={{kitx|add:10}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitl|div:10}}</text>
+          <text x={{toix|add:10}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toil|div:10}}</text>
+          <text x={{drawx|add:10}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{drawl|div:10}}</text>
+          <text x={{stax|add:10}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{stal|div:10}}</text>
+          <text x={{washx|add:10}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washl|div:10}}</text>
+          <text x={{dinx|add:10}} y={{din_yco|add:25}} style="font-size:11px;" fill="{{din_fill}}">{{dinl|div:10}}</text>
+          <text x={{ctoix|add:10}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoil|div:10}}</text>
+          <text x={{stox|add:10}} y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">{{stol|div:10}}</text>
+          <text x={{otsx|add:10}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsl|div:10}}</text>
+          <text x={{parx|add:10}} y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">{{parl|div:10}}</text>
+          <text x={{garx|add:10}} y={{gar_yco|add:25}} style="font-size:11px;"  fill="{{gar_fill}}">{{garl|div:10}}</text>
+          <text x={{foyx|add:10}} y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyl|div:10}}</text>
+          <text x={{utix|add:10}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{util|div:10}}</text>
+          <text x={{sto2x|add:10}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2l|div:10}}</text>
+          <text x={{ots2x|add:10}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2l|div:10}}</text>
+          <text x={{bed2x|add:10}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yl|div:10}}</text>
+          <text x={{entx|add:10}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entl|div:10}}</text>
+          
+          
+          <!-- X symbol -->
+          <text x={{bedx|add:32}} y={{bed_yco|add:25}}  style="font-size:11px;"  fill="black">X</text>
+          <text x={{kitx|add:32}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{toix|add:32}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{drawx|add:32}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{stax|add:32}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{washx|add:32}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">X</text>
+          <text x={{dinx|add:32}} y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">X</text>
+          <text x={{ctoix|add:32}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">X</text>
+          <text x={{stox|add:32}}  y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">X</text>
+          <text x={{otsx|add:32}} y={{ots_yco|add:25}}   style="font-size:11px;" fill="{{ots_fill}}">X</text>
+          <text x={{parx|add:32}}  y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">X</text>
+          <text x={{garx|add:32}}  y={{gar_yco|add:25}} style="font-size:11px;" fill="{{gar_fill}}">X</text>
+          <text x={{foyx|add:32}} y={{foy_yco|add:25}}  style="font-size:11px;" fill="{{foy_fill}}">X</text>
+          <text x={{utix|add:32}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">X</text>
+          <text x={{sto2x|add:32}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">X</text>
+          <text x={{ots2x|add:32}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">X</text>
+          <text x={{bed2x|add:32}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">X</text>
+          <text x={{entx|add:32}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">X</text>
+  
+      
+          <!-- coordinates for width -->
+          <text x={{bedx|add:40}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedw|div:10}}</text>
+          <text x={{kitx|add:40}}  y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitw|div:10}}</text>
+          <text x={{toix|add:40}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toiw|div:10}}</text>
+          <text x={{drawx|add:40}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{draww|div:10}}</text>
+          <text x={{stax|add:40}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{staw|div:10}}</text>
+          <text x={{washx|add:40}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washw|div:10}}</text>
+          <text x={{dinx|add:40}}  y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">{{dinw|div:10}}</text>
+          <text x={{ctoix|add:40}}  y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoiw|div:10}}</text>
+          <text x={{stox|add:40}}  y={{sto_yco|add:25}} style="font-size:11px;"fill="{{sto_fill}}">{{stow|div:10}}</text>
+          <text x={{otsx|add:40}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsw|div:10}}</text>
+          <text x={{parx|add:40}} y={{par_yco|add:25}}  style="font-size:11px;"fill="{{par_fill}}">{{parw|div:10}}</text>
+          <text x={{garx|add:40}}  y={{gar_yco|add:25}}  style="font-size:11px;" fill="{{gar_fill}}">{{garw|div:10}}</text>
+          <text x={{foyx|add:40}}  y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyw|div:10}}</text>
+          <text x={{utix|add:40}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{utiw|div:10}}</text>
+          <text x={{sto2x|add:40}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2w|div:10}}</text>
+          <text x={{ots2x|add:40}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2w|div:10}}</text>
+          <text x={{bed2x|add:40}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yw|div:10}}</text>
+          <text x={{entx|add:40}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entw|div:10}}</text>
+  
+        </svg>
+      </div>
+    </div>
+
+    
+    <div class="mySlides">
+      <div class="numbertext">3 / 3</div>
+      <div class="container" style="width: 100px; height: 100px;">
+        <svg id="dynamicIllustration" version="1.1" width="300" height="270"" viewBox="0 0 320 450" xmlns="http://www.w3.org/2000/svg">
+          <rect x={{bedx}} y={{bedy}} width={{bedw}} height={{bedl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);" ></rect>
+          <rect x={{kitx}} y={{kity}} width={{kitw}} height={{kitl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{toix}} y={{toiy}} width={{toiw}} height={{toil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{drawx}} y={{drawy}} width={{draww}} height={{drawl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{stax}} y={{stay}} width={{staw}} height={{stal}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{dinx}} y={{diny}} width={{dinw}} height={{dinl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{ctoix}} y={{ctoiy}} width={{ctoiw}} height={{ctoil}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{otsx}} y={{otsy}} width={{otsw}} height={{otsl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{washx}} y={{washy}} width={{washw}} height={{washl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{entx}} y={{enty}} width={{entw}} height={{entl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{parx}} y={{pary}} width={{parw}} height={{parl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{garx}} y={{gary}} width={{garw}} height={{garl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{foyx}} y={{foyy}} width={{foyw}} height={{foyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{utix}} y={{utiy}} width={{utiw}} height={{util}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{stox}} y={{stoy}} width={{stow}} height={{stol}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{sto2x}} y={{sto2y}} width={{sto2w}} height={{sto2l}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{bed2x}} y={{bed2y}} width={{bed2w}} height={{bed2yl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x={{emptyx}} y={{emptyy}} width={{emptyw}} height={{emptyl}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+          <rect x ={{ots2l}} y={{ots2w}} width={{ots2x}} height={{ots2y}} style=" fill: none; stroke-width:1;stroke:rgb(0,0,0);"></rect>
+  
+          <!-- Naming coordinates -->
+          <text x={{bedx|add:10}} y={{bed_yco|add:10}} style="font-size:14px;" fill="black">Bedroom</text>
+          <text x={{kitx|add:10}} y={{kit_yco|add:10}} style="font-size:14px;" fill="black">Kitchen</text>
+          <text x={{toix|add:10}} y={{toi_yco|add:10}} style="font-size:14px;"fill="black">Toilet</text> 
+          <text x={{drawx|add:10}} y={{draw_yco|add:10}} style="font-size:14px;" fill="black">Drawing</text>
+          <text x={{stax|add:10}} y={{sta_yco|add:10}} style="font-size:14px;"  fill="black">Stairs</text>
+          <text x={{washx|add:10}} y={{wash_yco|add:10}} style="font-size:14px;" fill="{{wash_fill}}">Wash</text>
+          <text x={{dinx|add:10}} y={{din_yco|add:10}} style="font-size:14px;" fill="{{din_fill}}">Dining</text>
+          <text x={{ctoix|add:10}} y={{ctoi_yco|add:10}} style="font-size:14px;" fill="{{ctoi_fill}}">Toilet</text>
+          <text x={{stox|add:10}} y={{sto_yco|add:10}} style="font-size:14px;" fill="{{sto_fill}}">Store</text>
+          <text x={{otsx|add:10}} y={{ots_yco|add:10}}  style="font-size:14px;" fill="{{ots_fill}}">Ots</text>
+          <text x={{parx|add:10}} y={{par_yco|add:10}} style="font-size:14px;" fill="{{par_fill}}">Parking</text>
+          <text x={{garx|add:10}} y={{gar_yco|add:10}} style="font-size:14px;" fill="{{gar_fill}}">Garden</text>
+          <text x={{foyx|add:10}} y={{foy_yco|add:10}}  style="font-size:14px;" fill="{{foy_fill}}">Foyer</text>
+          <text x={{utix|add:10}} y={{uti_yco|add:10}} style="font-size:14px;" fill="{{uti_fill}}">Utility</text>
+          <text x={{sto2x|add:10}} y={{sto2_yco|add:10}} style="font-size:14px;" fill="{{sto2_fill}}">2Store</text>
+          <text x={{ots2x|add:10}} y={{ots2_yco|add:10}} style="font-size:14px;"  fill="{{ots2_fill}}">2Ots</text>
+          <text x={{bed2x|add:10}} y={{bed2_yco|add:10}} style="font-size:14px;" fill="{{bed2_fill}}">Bedroom</text>
+          <text x={{entx|add:10}} y={{ent_yco|add:10}} style="font-size:14px;" fill="{{ent_fill}}">Entry</text>
+          
+          <!-- Text coordinates for length -->
+          <text x={{bedx|add:10}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedl|div:10}}</text>
+          <text x={{kitx|add:10}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitl|div:10}}</text>
+          <text x={{toix|add:10}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toil|div:10}}</text>
+          <text x={{drawx|add:10}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{drawl|div:10}}</text>
+          <text x={{stax|add:10}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{stal|div:10}}</text>
+          <text x={{washx|add:10}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washl|div:10}}</text>
+          <text x={{dinx|add:10}} y={{din_yco|add:25}} style="font-size:11px;" fill="{{din_fill}}">{{dinl|div:10}}</text>
+          <text x={{ctoix|add:10}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoil|div:10}}</text>
+          <text x={{stox|add:10}} y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">{{stol|div:10}}</text>
+          <text x={{otsx|add:10}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsl|div:10}}</text>
+          <text x={{parx|add:10}} y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">{{parl|div:10}}</text>
+          <text x={{garx|add:10}} y={{gar_yco|add:25}} style="font-size:11px;"  fill="{{gar_fill}}">{{garl|div:10}}</text>
+          <text x={{foyx|add:10}} y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyl|div:10}}</text>
+          <text x={{utix|add:10}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{util|div:10}}</text>
+          <text x={{sto2x|add:10}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2l|div:10}}</text>
+          <text x={{ots2x|add:10}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2l|div:10}}</text>
+          <text x={{bed2x|add:10}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yl|div:10}}</text>
+          <text x={{entx|add:10}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entl|div:10}}</text>
+          
+          
+          <!-- X symbol -->
+          <text x={{bedx|add:32}} y={{bed_yco|add:25}}  style="font-size:11px;"  fill="black">X</text>
+          <text x={{kitx|add:32}} y={{kit_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{toix|add:32}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{drawx|add:32}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{stax|add:32}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">X</text>
+          <text x={{washx|add:32}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">X</text>
+          <text x={{dinx|add:32}} y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">X</text>
+          <text x={{ctoix|add:32}} y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">X</text>
+          <text x={{stox|add:32}}  y={{sto_yco|add:25}} style="font-size:11px;" fill="{{sto_fill}}">X</text>
+          <text x={{otsx|add:32}} y={{ots_yco|add:25}}   style="font-size:11px;" fill="{{ots_fill}}">X</text>
+          <text x={{parx|add:32}}  y={{par_yco|add:25}} style="font-size:11px;" fill="{{par_fill}}">X</text>
+          <text x={{garx|add:32}}  y={{gar_yco|add:25}} style="font-size:11px;" fill="{{gar_fill}}">X</text>
+          <text x={{foyx|add:32}} y={{foy_yco|add:25}}  style="font-size:11px;" fill="{{foy_fill}}">X</text>
+          <text x={{utix|add:32}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">X</text>
+          <text x={{sto2x|add:32}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">X</text>
+          <text x={{ots2x|add:32}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">X</text>
+          <text x={{bed2x|add:32}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">X</text>
+          <text x={{entx|add:32}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">X</text>
+  
+      
+          <!-- coordinates for width -->
+          <text x={{bedx|add:40}} y={{bed_yco|add:25}}  style="font-size:11px;" fill="black">{{bedw|div:10}}</text>
+          <text x={{kitx|add:40}}  y={{kit_yco|add:25}} style="font-size:11px;" fill="black">{{kitw|div:10}}</text>
+          <text x={{toix|add:40}} y={{toi_yco|add:25}} style="font-size:11px;" fill="black">{{toiw|div:10}}</text>
+          <text x={{drawx|add:40}} y={{draw_yco|add:25}} style="font-size:11px;" fill="black">{{draww|div:10}}</text>
+          <text x={{stax|add:40}} y={{sta_yco|add:25}} style="font-size:11px;" fill="black">{{staw|div:10}}</text>
+          <text x={{washx|add:40}} y={{wash_yco|add:25}} style="font-size:11px;" fill="{{wash_fill}}">{{washw|div:10}}</text>
+          <text x={{dinx|add:40}}  y={{din_yco|add:25}} style="font-size:11px;"  fill="{{din_fill}}">{{dinw|div:10}}</text>
+          <text x={{ctoix|add:40}}  y={{ctoi_yco|add:25}} style="font-size:11px;" fill="{{ctoi_fill}}">{{ctoiw|div:10}}</text>
+          <text x={{stox|add:40}}  y={{sto_yco|add:25}} style="font-size:11px;"fill="{{sto_fill}}">{{stow|div:10}}</text>
+          <text x={{otsx|add:40}} y={{ots_yco|add:25}}  style="font-size:11px;"  fill="{{ots_fill}}">{{otsw|div:10}}</text>
+          <text x={{parx|add:40}} y={{par_yco|add:25}}  style="font-size:11px;"fill="{{par_fill}}">{{parw|div:10}}</text>
+          <text x={{garx|add:40}}  y={{gar_yco|add:25}}  style="font-size:11px;" fill="{{gar_fill}}">{{garw|div:10}}</text>
+          <text x={{foyx|add:40}}  y={{foy_yco|add:25}}  style="font-size:11px;"  fill="{{foy_fill}}">{{foyw|div:10}}</text>
+          <text x={{utix|add:40}} y={{uti_yco|add:25}} style="font-size:11px;" fill="{{uti_fill}}">{{utiw|div:10}}</text>
+          <text x={{sto2x|add:40}} y={{sto2_yco|add:25}} style="font-size:11px;" fill="{{sto2_fill}}">{{sto2w|div:10}}</text>
+          <text x={{ots2x|add:40}} y={{ots2_yco|add:25}} style="font-size:11px;"  fill="{{ots2_fill}}">{{ots2w|div:10}}</text>
+          <text x={{bed2x|add:40}} y={{bed2_yco|add:25}} style="font-size:11px;" fill="{{bed2_fill}}">{{bed2yw|div:10}}</text>
+          <text x={{entx|add:40}} y={{ent_yco|add:25}} style="font-size:11px;" fill="{{ent_fill}}">{{entw|div:10}}</text>
+  
+        </svg>
+      </div>
+      
+    </div>
+    
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+ 
+  
+
+</div>
+<script>
+  var slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+  }
+</script>
+
+{% endblock %}
+
+  
+  

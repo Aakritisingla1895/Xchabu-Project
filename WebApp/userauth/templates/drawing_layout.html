@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block navbar %}
+{% load mathfilters %}
+<div class="brandlogo">
+  <img src="{% static 'xchabu.png'%}" alt="logo" style="height: 50px; width: 50px;"/>
+</div>
+<ul style="padding-left: 65%;" >
+<li><a>{{date|time:"H:i:s"}}</a></li>
+{% for data in  udata %}
+<li><a href="#">Hello ,{{data.name}}</a></li>
+{% endfor %}
+<li ><a href="/logout">Logout</a></li>
+<li><a href = "/dash_bord">Return to main </a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+
+
+    {% for msg in messages %}
+    <p class="text-danger text-center" style="justify-content: center ;  text-align:center;padding-right: 5%; padding-left: 5%; padding-top: 5%;">{{msg}}</p>
+    {% endfor %}
+
+    <div class="row" style=" column-gap: 40px; justify-content: center ; padding-top: 5%;">
+
+      
+        <div class="card" style=" column-gap: 40px; width: 400px; height:10%;display: flex; justify-content: space-between;">
+          <div class="card-body" style="column-gap: 40px; border: 1px solid orangered; width: 400px; opacity: 1.5;" >
+            <center>
+              <h5 class="card-title">Project Download Completed</h5>
+              <button class="btn btn-primary" onclick="goBack()">Back to Layout Generations</button>
+            </center>
+          </div>
+        </div>
+      
+      
+    </div>
+
+
+    
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>
+   
+  
+   <div id="footer"> 
+    <p>All right reserved<a href="#">   xChabu</a></p>
+   </div>
+   <script>
+    const openNav = () =>{
+       document.getElementById('sidebar').style.width = "300px";
+    }
+    const closeNav = () =>{
+       document.getElementById('sidebar').style.width = "0";
+        }
+    </script>
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+{% endblock %}

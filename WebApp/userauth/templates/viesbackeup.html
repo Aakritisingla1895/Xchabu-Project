@@ -1,0 +1,538 @@
+sql = East.objects.filter(layoutno="1B2SWU")
+        doorsql = Eastdoor.objects.filter(layoutname="1B2SWU")
+        wallsql = Eastwall.objects.filter(layoutname="1B2SWU")
+        for q in sql:
+            x=0
+            y=0
+            ratio=8
+            bedx=q.bedx=x
+            q.bedy=y
+            bedy=(q.bedy+q.util)*ratio
+            bedw=q.bedw*ratio
+            bedl=q.bedl*ratio
+            kitx=q.kitx=x
+            kity=(q.util+q.stal+q.drawl)*ratio
+            kitw=q.kitw*ratio
+            kitl=q.kitl*ratio
+            toix=(x+q.utiw)*ratio
+            toiy=(y+q.sto2l)*ratio
+            toiw=q.toiw*ratio
+            toil=q.toil*ratio+7
+            drawx=(x+q.staw)*ratio
+            drawy=(y+q.util+q.bedl)*ratio
+            draww=q.draww*ratio
+            drawl=q.drawl*ratio+2 
+            stax=q.stax=x
+            stay=(y+q.util+q.bedl)*ratio
+            staw=q.staw*ratio
+            stal=q.stal*ratio    
+            dinx=q.dinx
+            diny=q.diny
+            dinw=q.dinw
+            dinl=q.dinl
+            ctoix=q.ctoix=x
+            ctoiy=y+q.util+q.stal+q.bedl
+            ctoiw=q.ctoiw
+            ctoil=q.ctoil
+            stox=(x+q.washw)*ratio
+            stoy=(y+q.util+q.bedl+q.stal)*ratio
+            stow=q.stow*ratio
+            stol=q.stol*ratio
+            otsx=q.otsx
+            otsy=q.otsy
+            otsw=q.otsw
+            otsl=q.otsl
+            washx=q.washx=x
+            washy=(y+q.util+q.bedl+q.stal)*ratio
+            washw=q.washw*ratio
+            washl=q.washl*ratio
+            entx=(x+q.kitw)*ratio
+            enty=(y+q.util+q.bedl+q.drawl)*ratio
+            entw=q.entw*ratio
+            entl=q.entl*ratio
+            parx=q.parx
+            pary=q.pary
+            parw=q.parw
+            parl=q.parl
+            garx=q.garx
+            gary=q.gary
+            garw=q.garw
+            garl=q.garl
+            foyx=q.foyx
+            foyy=q.foyy
+            foyw=q.foyw
+            foyl=q.foyl
+            utix = q.utix=x
+            utiy = q.utiy=y
+            utiw = q.utiw*ratio
+            util = q.util*ratio
+            sto2x = (x+q.bedw)*ratio
+            sto2y = q.sto2y=y
+            sto2w = q.sto2w*ratio
+            sto2l = q.sto2l*ratio
+            emptyx = q.emptyx=x
+            emptyy = y+q.util+q.bedl+q.stal+q.washl
+            emptyw = (y+q.util+q.bedl+q.washl+q.stal)*ratio
+            emptyl = (q.emptyl)*ratio
+            # ======doordb======
+        for door in doorsql:
+            dratio=8
+            x=0
+            y=0
+            pt1 =0.7*dratio
+            pt2=0.4*dratio
+            roomdoor = 3
+            toidoor =3
+            entdoor =4
+            # =====doorbed===
+            dbedl=door.dbedl=pt1
+            dbedw=door.dbedw
+            dbedx=x+bedw-22
+            dbedy=y+util+bedl-2
+            # =======doorkit===
+            dkitl=door.dkitl=pt1
+            dkitw=kitw-pt1-pt1-1
+            dkitx=x+pt1
+            dkity=y+util+bedl+stal-2
+            print("dkitl(pt1):",dkitl,"dkitw(kitw-pt1-pt1-1):",dkitw,"dkitx(x+pt1):",dkitx,"dkity(y+util+bedl+stal-2):",dkity)
+            # =======doortoi==
+            dtoil=door.dtoil=pt1
+            dtoiw=toidoor
+            dtoix=x+bedw+pt1+pt1+1
+            dtoiy=y+toil+ctoil-pt1+3
+
+            ddrawl=door.dbedl=pt1
+            ddraww=roomdoor+20
+            ddrawx=x+staw+8
+            ddrawy=y+util+bedl+drawl-pt1+3
+
+            dstal=door.dstal
+            dstaw=door.dstaw
+            dstax=door.dstax
+            dstay=door.dstay
+
+            ddinl=door.ddinl
+            ddinw=door.ddinw
+            ddinx=door.ddinx
+            ddiny=door.ddiny
+
+            dctoil=door.dctoil
+            dctoiw=door.dctoiw
+            dctoix=door.dctoix
+            dctoiy=door.dctoiy
+
+            dstol=door.dstol
+            dstow=door.dstow=pt1
+            dstox=x+utiw-pt1+23
+            dstoy=y+toil-35
+
+            dotsl=door.dotsl
+            dotsw=door.dotsw
+            dotsx=door.dotsx
+            dotsy=door.dotsy
+
+            dwashl=door.dwashl=pt1
+            dwashw=roomdoor
+            dwashx=x+pt1+2
+            dwashy=y+util+bedl+stal-washl-50+washl-pt2-2
+
+            dentl=y+util+bedl+stal-washl-50+washl-pt2-2
+            dentw=entdoor-4
+            dentx=x+kitw+2
+            denty=y+util+bedl+stal-2
+
+            dparl=door.dparl
+            dparw=door.dparw
+            dparx=door.dparx
+            dpary=door.dpary
+
+            dgarl=door.dgarl
+            dgarw=door.dgarw
+            dgarx=door.dgarx
+            dgary=door.dgary
+
+            dfoyl=door.dfoyl
+            dfoyw=door.dfoyw
+            dfoyx=door.dfoyx
+            dfoyy=door.dfoyy
+
+            dutil=door.dutil=pt1+20
+            dutiw=roomdoor+5
+            dutix=x+utiw-roomdoor
+            dutiy=y+util-2
+
+            dsto2l=door.dsto2l=pt1
+            dsto2w=door.dsto2w
+            dsto2x=x+washw+pt1-2
+            dsto2y=y+util+bedl+stal-washl-50+washl-2
+
+            demptyl=door.demptyl
+            demptyw=pt1+2
+            demptyx=x+staw-2
+            demptyy=y+util+bedl+stal-48
+
+        for w in wallsql:
+            scale = 8
+            x=0
+            y=0
+            pt1=0.7*scale
+            pt2=0.4*scale
+            wbedl= bedl-pt2+1
+            wbedw = bedw-pt1-pt2
+            wbedx=x+pt1
+            wbedy=y + util+pt2
+
+            wkitl =kitl-pt2-pt1
+            wkitw = kitw-pt1-pt1
+            wkitx=x+pt1
+            wkity=y+util+bedl+stal+pt2
+            print("wkitl(kitl-pt2-pt1):",wkitl,"wkitw(kitw-pt1-pt1):",wkitw,"wkitx(x+pt1):",wkitx,"wkity(y+util+bedl+stal+pt2)")
+
+            wtoil=toil-pt2-pt2+1
+            wtoiw =toiw-pt1-5
+            wtoix=x+bedw+5
+            wtoiy=y+util+pt2-1+23
+
+            wdrawl =drawl-pt1
+            wdraww =draww-pt1-pt2
+            wdrawx =x + staw+pt2
+            wdrawy =y + util + bedl
+            wstal=stal-pt2-50
+            wstaw=staw-pt1+2
+            wstax=staw-pt1+2
+            wstay=staw-pt1+2
+            wdinl=w.wdinl
+            wdinw=w.wdinw
+            wdinx=w.wdinx
+            wdiny=w.wdiny
+            wctoil=w.wctoil
+            wctoiw=w.wctoiw
+            wctoix=w.wctoix
+            wctoiy=w.wctoiy
+            wstol=stol-pt2
+            wstow=stow-pt2+1.5
+            wstox=x + washw+pt2
+            wstoy=y + util + bedl + stal - washl+pt2-50
+            wotsl=w.wstal
+            wotsw=w.wotsw
+            wotsx=w.wotsx
+            wotsy=w.wotsy
+            wwashl=washl-pt2-pt2
+            wwashw=washw-pt1+1
+            wwashx=x+pt1
+            wwashy=y + util + bedl + stal - washl+pt2-50
+            wentl=w.wentl
+            wentw=w.wentw
+            wentx=w.wentx
+            wenty=w.wenty
+            wparl=w.wparl
+            wparw=w.wparw
+            wparx=w.wparx
+            wpary=w.wpary
+            wgarl=w.wgarl
+            wgarw=w.wgarl
+            wgarx=w.wgarx
+            wgary=w.wgary
+            wfoyl=w.wfoyl
+            wfoyw=w.wfoyw
+            wfoyx=w.wfoyx
+            wfoyy=w.wfoyy
+
+            wutil=util-pt1+2
+            wutiw=utiw-pt1-pt2
+            wutix=x+pt1
+            wutiy=y+pt1
+
+            wsto2l=toil-pt1+1
+            wsto2w=toiw-pt1-20
+            wsto2x=x + utiw+20-1
+            wsto2y=y+pt1
+            wemptyl=w.wemptyl
+            wemptyw=staw-pt1
+            wemptyx=x+pt1
+            wemptyy=y + util + bedl + stal-50
+            
+            
+
+            
+
+            context={
+                "date":datetime.now,
+                "bedx":bedx,
+                "bedy":bedy,
+                "bedw":bedw,
+                "bedl":bedl,
+                "kitx":kitx,
+                "kity":kity,
+                "kitw":kitw,
+                "kitl":kitl,
+                "utix":utix,
+                "utiy":utiy,
+                "utiw":utiw,
+                "util":util,
+                "foyx":foyx,
+                "foyy":foyy,
+                "foyw":foyw,
+                "foyl":foyl,
+                "garx":garx,
+                "gary":gary,
+                "garw":garw,
+                "garl":garl,
+                "parx":parx,
+                "pary":pary,
+                "parw":parw,
+                "parl":parl,
+                "entx":entx,
+                "enty":enty,
+                "entw":entw,
+                "entl":entl,
+                "washx":washx,
+                "washy":washy,
+                "washw":washw,
+                "washl":washl,
+                "otsx":otsx,
+                "otsy":otsy,
+                "otsw":otsw,
+                "otsl":otsl,
+                "stox":stox,
+                "stoy":stoy,
+                "stow":stow,
+                "stol":stol,
+                "toix":toix,
+                "toiy":toiy,
+                "toiw":toiw,
+                "toil":toil,
+                "drawx":drawx,
+                "drawy":drawy,
+                "draww":draww,
+                "drawl":drawl,
+                "stax":stax,
+                "stay":stay,
+                "staw":staw,
+                "stal":stal,
+                "dinx":dinx,
+                "diny":diny,
+                "dinw":dinw,
+                "dinl":dinl,
+                "ctoix":ctoix,
+                "ctoiy":ctoiy,
+                "ctoiw":ctoiw,
+                "ctoil":ctoil,
+                "q":q,
+                "udata":User.objects.filter(email=request.session['uid']),
+                "date":datetime.now(),
+                "emptyx":emptyx,
+                "emptyy":emptyx,
+                "emptyw":emptyw,
+                "emptyl":emptyl,
+                "sto2x":sto2x,
+                "sto2y":sto2y,
+                "sto2w":sto2w,
+                "sto2l":sto2l,
+                # ====doordb===
+                "dbedl":dbedl,
+                "dbedw":dbedw,
+                "dbedx":dbedx,
+                "dbedy":dbedy,
+                "dkitl":dkitl,
+                "dkitw":dkitw,
+                "dkitx":dkitx,
+                "dkity":dkity, 
+                "dtoil":dtoil,
+                "dtoiw":dtoiw,
+                "dtoix":dtoix,
+                "dtoiy":dtoiy, 
+                "ddrawl":ddrawl,
+                "ddraww":ddraww,
+                "ddrawx":ddrawx,
+                "ddrawy":ddrawy,
+                "dstal":dstal,
+                "dstaw":dstaw,
+                "dstax":dstax,
+                "dstay":dstay, 
+                "ddinl":ddinl,
+                "ddinw":ddinw,
+                "ddinx":ddinx,
+                "ddiny":ddiny,
+                "dctoil":dctoil,
+                "dctoiw":dctoiw,
+                "dctoix":dctoix,
+                "dctoiy":dctoiy, 
+                "dstol":dstol,
+                "dstow":dstow,
+                "dstox":dstox,
+                "dstoy":dstoy, 
+                "dotsl":dotsl,
+                "dotsw":dotsw,
+                "dotsx":dotsx,
+                "dotsy":dotsy, 
+                "dwashl":dwashl,
+                "dwashw":dwashw,
+                "dwashx":dwashx,
+                "dwashy":dwashy, 
+                "dentl":dentl,
+                "dentw":dentw,
+                "dentx":dentx,
+                "denty":denty, 
+                "dparl":dparl,
+                "dparw":dparw,
+                "dparx":dparx,
+                "dpary":dpary, 
+                "dgarl":dgarl,
+                "dgarw":dgarw,
+                "dgarx":dgarx,
+                "dgary":dgary,
+                "dfoyl":dfoyl,
+                "dfoyw":dfoyw,
+                "dfoyx":dfoyx,
+                "dfoyy":dfoyy, 
+                "dutil":dutil,
+                "dutiw":dutiw,
+                "dutix":dutix,
+                "dutiy":dutiy, 
+                "dsto2l":dsto2l,
+                "dsto2w":dsto2w,
+                "dsto2x":dsto2x,
+                "dsto2y":dsto2y,  
+                "demptyl":demptyl,
+                "demptyw":demptyw,
+                "demptyx":demptyx,
+                "demptyy":demptyy,  
+                # =======walldb==
+                "wbedl":wbedl,
+                "wbedw":wbedw,
+                "wbedx":wbedx,
+                "wbedy":wbedy,
+                "wkitl":wkitl,
+                "wkitw":wkitw,
+                "wkitx":wkitx,
+                "wkity":wkity,
+                "wtoil":wtoil,
+                "wtoiw":wtoiw,
+                "wtoix":wtoix,
+                "wtoiy":wtoiy,
+                "wdrawl":wdrawl,
+                "wdraww":wdraww,
+                "wdrawx":wdrawx,
+                "wdrawy":wdrawy,
+                "wstal":wstal,
+                "wstaw":wstaw,
+                "wstax":wstax,
+                "wstay":wstay,
+                "wdinl":wdinl,
+                "wdinw":wdinw,
+                "wdinx":wdinx,
+                "wdiny":wdiny,
+                "wctoil":wctoil,
+                "wctoiw":wctoiw,
+                "wctoix":wctoix,
+                "wctoiy":wctoiy,
+                "wstol":wstol,
+                "wstow":wstow,
+                "wstox":wstox,
+                "wstoy":wstoy,
+                "wotsl":wotsl,
+                "wotsw":wotsw,
+                "wotsx":wotsx,
+                "wotsy":wotsy,
+                "wwashl":wwashl,
+                "wwashw":wwashw,
+                "wwashx":wwashx,
+                "wwashy":wwashy,
+                "wentl":wentl,
+                "wentw":wentw,
+                "wentx":wentx,
+                "wenty":wenty,
+                "wparl":wparl,
+                "wparw":wparw,
+                "wparx":wparx,
+                "wpary":wpary,
+                "wgarl":wgarl,
+                "wgarw":wgarw,
+                "wgarx":wgarx,
+                "wgary":wgary,
+                "wfoyl":wfoyl,
+                "wfoyw":wfoyw,
+                "wfoyx":wfoyx,
+                "wfoyy":wfoyy,
+                "wutil":wutil,
+                "wutiw":wutiw,
+                "wutix":wutix,
+                "wutiy":wutiy,
+                "wsto2l":wsto2l,
+                "wsto2w":wsto2w,
+                "wsto2x":wsto2x,
+                "wsto2y":wsto2y,
+                "wemptyl":wemptyl,
+                "wemptyw":wemptyw,
+                "wemptyx":wemptyx,
+                "wemptyy":wemptyy
+                }
+
+
+                ===============================createproject data======
+                if request.method == 'POST':
+            firstname = request.POST.get('firstname')
+            ftype = request.POST.get('ftype')
+            direction = request.POST.get('direction')
+            yes = request.POST.get('yes',0)
+            no = request.POST.get('no',0)
+            ots = request.POST.get('ots',0)
+            store = request.POST.get('store',0)
+            garden = request.POST.get('garden',0)
+            temple = request.POST.get('temple',0)
+            parking = request.POST.get('parking',0)
+            dressingroom = request.POST.get('dressingroom',0)
+            utility = request.POST.get('utility',0)
+            washarea = request.POST.get('washarea',0)
+            height = request.POST.get('height')
+            width = request.POST.get('width')
+            user = User.objects.get(id=id)
+
+            # if CreateProject.objects.filter(user=user).exists():
+            #     return redirect('/toolbar')
+            data = CreateProject.objects.filter(firstname=firstname,ftype=ftype,direction=direction,yes=yes,no=no,
+            ots=ots,store=store,garden=garden,temple=temple,parking=parking,dressingroom=dressingroom,utility=utility,
+            washarea=washarea,height=height,width=width,user=user)
+            data.save()
+
+            <!-- <rect x={{wbedx}} y={{wbedy}} width={{wbedw}} height={{wbedl}}></rect> -->
+        <!-- <rect x={{wkitx}} y={{wkity}} width={{wkitw}} height={{wkitl}}></rect> -->
+        <!-- <rect x={{wtoix}} y={{wtoiy}} width={{wtoiw}} height={{wtoil}}></rect> -->
+        <!-- <rect x={{wdrawx}} y={{wdrawy}} width={{wdraww}} height={{wdrawl}}></rect> -->
+        <!-- <rect x={{wstax}} y={{wstay}} width={{wstaw}} height={{wstal}}></rect> -->
+        <!-- <rect x={{wdinx}} y={{wdiny}} width={{wdinw}} height={{wdinl}}></rect> -->
+        <!-- <rect x={{wctoix}} y={{wctoiy}} width={{wctoiw}} height={{wctoil}}></rect> -->
+        <!-- <rect x={{wstox}} y={{wstoy}} width={{wstow}} height={{wstol}}></rect> -->
+        <!-- <rect x={{wotsx}} y={{wotsy}} width={{wotsw}} height={{wotsl}}></rect> -->
+        <!-- <rect x={{wwashx}} y={{wwashy}} width={{wwashw}} height={{wwashl}}></rect> -->
+        <!-- <rect x={{wentx}} y={{wenty}} width={{wentw}} height={{wentl}}></rect> -->
+        <!-- <rect x={{wparx}} y={{wpary}} width={{wparw}} height={{wparl}}></rect> -->
+        <!-- <rect x={{wgarx}} y={{wgary}} width={{wgarw}} height={{wgarl}}></rect> -->
+        <!-- <rect x={{wfoyx}} y={{wfoyy}} width={{wfoyw}} height={{wfoyl}}></rect> -->
+        <!-- <rect x={{wutix}} y={{wutiy}} width={{wutiw}} height={{wutil}}></rect> -->
+        <!-- <rect x={{wsto2x}} y={{wsto2y}} width={{wsto2w}} height={{wsto2l}}></rect> -->
+        <!-- <rect x={{wemptyx}} y={{wemptyy}} width={{wemptyw}} height={{wemptyl}}></rect> -->
+
+        
+        <!-- doordb -->
+        <!-- <rect x={{dbedx}} y={{dbedy}} width={{dbedw}} height={{dbedl}} id="door"></rect> -->
+        <!-- <rect x={{dkitx}} y={{dkity}} width={{dkitw}} height={{dkitl}} id="door"></rect>  -->
+        <!-- <rect x={{dtoix}} y={{dtoiy}} width={{dtoiw}} height={{dtoil}} id="door"></rect> -->
+        <!-- <rect x={{ddrawx}} y={{ddrawy}} width={{ddraww}} height={{ddrawl}} id="door"></rect> -->
+        <!-- <rect x={{dstax}} y={{dstay}} width={{dstaw}} height={{dstal}} id="door"></rect> -->
+        <!-- <rect x={{ddinx}} y={{ddiny}} width={{ddinw}} height={{ddinl}} id="door"></rect> -->
+        <!-- <rect x={{dctoix}} y={{dctoiy}} width={{dctoiw}} height={{dctoil}} id="door"></rect> -->
+        <!-- <rect x={{dstox}} y={{dstoy}} width={{dstow}} height={{dstol}} id="door"></rect> -->
+        <!-- <rect x={{dotsx}} y={{dotsy}} width={{dotsw}} height={{dotsl}} id="door"></rect> -->
+        <!-- <rect x={{dwashx}} y={{dwashy}} width={{dwashw}} height={{dwashl}} id="door"></rect> -->
+        <!-- <rect x={{dentx}} y={{denty}} width={{dentw}} height={{dentl}} id="door"></rect> -->
+        <!-- <rect x={{dparx}} y={{dpary}} width={{dparw}} height={{dparl}} id="door"></rect> -->
+        <!-- <rect x={{dgarx}} y={{dgary}} width={{dgarw}} height={{dgarl}} id="door"></rect> -->
+        <!-- <rect x={{dfoyx}} y={{dfoyy}} width={{dfoyw}} height={{dfoyl}} id="door"></rect> -->
+        <rect x={{dutix}} y={{dutiy}} width={{dutiw}} height={{dutil}} id="door"></rect>
+        <!-- <rect x={{dsto2x}} y={{dsto2y}} width={{dsto2w}} height={{dsto2l}} id="door"></rect> -->
+        <rect x={{demptyx}} y={{demptyy}} width={{demptyw}} height={{demptyl}} id="door"></rect>
+        
+        
+        

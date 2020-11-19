@@ -1,0 +1,247 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load myfilter %}
+{% block content %}
+<style>
+    .sidebar{
+      background-color:#203864;
+      height: 120vh;
+      position: sticky !important;
+      top: 0 !important;
+      left: 0%;
+      border-right: 2px solid orangered;
+    }
+    h4{
+      color: white;
+      text-align: center;
+      font-size: 25px;
+      font-family: sans-serif;
+      padding-top: 5%;
+      
+    }
+    .icon{
+      left: 15px;
+      position: absolute;
+      font-size: 25px;
+      width: 40px;
+      height: 38px;
+      padding-left: 8px;
+      background-color: orangered;
+    }
+    .form-control{
+      padding-left: 30%;
+    }
+    .amenities i{
+      font-size: 20px;
+      color: orangered;
+    }
+    .amenities{
+      font-size: 20px;
+      color: white;
+    }
+    .left{
+      padding-left: 12px;
+      color: white;
+    }
+    .right{
+      padding-left: 40px;
+      color: white;
+    }
+  
+   .btn{
+      background-color: orangered;
+      color: black;
+      font-weight: bold;
+      margin-left: 8%;
+      margin-bottom: 5%;
+    }
+    .form-check {
+      color: white;
+    }
+    .hr{
+      background-color: orangered;
+    }
+    .imagediv{
+      margin-left: 17%;
+      margin-top: 2%;
+    }
+    .row{
+      margin-top: 3px;
+    }
+    .card-image{
+      margin-left:15%;
+      width: 250px;
+    }
+    #textbox i{
+      font-size: 25px;
+      color: orangered;
+      padding-top: 8px;
+      margin-left: 2px;
+      padding-left: 10px;
+    }
+    #textbox input{
+      width: 100px;
+    }
+    .double{
+        /* border: 2px solid navy; */
+        margin-left:230px;
+        margin-top:3%;
+        border-style: double;
+        border-width: 8px;
+        border-color: black;
+
+    }
+    rect{
+        fill: none;
+        stroke-width:1;
+        stroke:rgb(0,0,0);
+        
+    }
+
+  </style>
+<div class="row">
+    <div class="col-3 sidebar">
+      <h4>Create project</h4>
+      <hr class="hr">
+      <form action="/tolbar" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="icon"><i class="fa fa-home"  aria-hidden="true"></i></label>
+        
+          <select  class="form-control" name="firstname" >
+            <option>1 BHK</option>
+            <option >2 BHK</option>
+            <option >3 BHK</option>
+            <option >4 BHK</option>
+            <option >5 BHK</option>
+            
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="icon"><i class="fa fa-building" aria-hidden="true"></i></label>
+          <select class="form-control"name="ftype" >
+            <option>1 Floor</option>
+            <option>2 Floor</option>
+            <option>3 Floor</option>
+            <option>4 Floor</option>
+            <option>5 Floor</option>
+            </select>
+          
+           </div>
+        <div class="form-group">
+        <label class="icon"><i class="fa fa-exchange" aria-hidden="true"></i></label>
+        <select class="form-control"name="direction" >
+          <option>East </option>
+          <option>West</option>
+          <option>North</option>
+          <option>South</option>
+          </select>
+          
+          </div>
+        <div class="form-group">
+          <div class="row" id="textbox">
+            <i class="fa fa-cubes" aria-hidden="true"></i>
+            <div class="col-4">
+              
+              <input type="text" class="form-control" name="height"  placeholder="Height">
+                      
+            </div>
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <div class="col-4">
+             
+              <input type="text" class="form-control" name="width"  placeholder="Width">
+              
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="amenities"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Vastu</label><br/>        
+          <div class="form-check form-check-inline ">
+            
+              <input class="form-check-input" type="checkbox" name="yes" checked="checked"  value="True" />
+             
+              <label class="form-check-label" for="gender">Yes</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="form-check form-check-inline ">
+              
+              <input class="form-check-input" type="checkbox" name="no" value="True" />
+              
+              <label class="form-check-label" for="gender">No</label>
+            </div>
+        </div>
+      <div class="form-group">
+        <label class="amenities"> <i class="fa fa-bath" aria-hidden="true"></i>&nbsp;&nbsp;Amenities</label>
+        <div class="row" >
+          <div class="left"> 
+            
+            <input type="checkbox" name="ots"  value="True"/>
+            
+            <label for="amenities">OTS</label><br>
+            
+            <input type="checkbox" name="store"  value="True" />
+            
+            <label for="amenities">Store</label><br>
+            
+            <input type="checkbox" name="garden"   value="True" />
+            
+            <label for="amenities">Garden</label><br>
+          
+            <input type="checkbox" name="poojaroom"   value="True" />
+            
+            <label for="amenities">Pooja Room</label><br><br>
+  
+          </div>
+          
+          <div class="right">
+            
+            <input type="checkbox" name="parking"  value="True" />
+            
+            <label for="amenities"> Parking</label><br>
+            
+            <input type="checkbox" name="washarea"  value="True" />
+           
+            <label for="amenities"> wash Area</label><br>
+            
+            <input type="checkbox" name="dressingroom"  value="True" /> 
+            
+            <label for="amenities"> Dressing</label><br>
+           
+            <input type="checkbox" name="utility"  value="True"/> 
+           
+            <label for="amenities"> Utility</label>
+          </div>
+        </div>
+        </div>
+          <button type="submit" class="btn">Create Project<button>
+      </form>
+    </div>
+    <div class="col-9">
+        
+    <div>
+       
+       
+        <svg  width="320" height="480" viewBox="0 0 320 450">
+          <rect x={{bedx}} y={{bedy}} width={{bedw}} height={{bedl}}></rect>
+          <rect x={{kitx}} y={{kity}} width={{kitw}} height={{kitl}}></rect>
+          <rect x={{toix}} y={{toiy}} width={{toiw}} height={{toil}}></rect>
+          <rect x={{drawx}} y={{drawy}} width={{draww}} height={{drawl}}></rect>
+          <rect x={{stax}} y={{stay}} width={{staw}} height={{stal}}></rect>
+          <rect x={{dinx}} y={{diny}} width={{dinw}} height={{dinl}}></rect>
+          <rect x={{ctoix}} y={{ctoiy}} width={{ctoiw}} height={{ctoil}}></rect>
+          <rect x={{otsx}} y={{otsy}} width={{otsw}} height={{otsl}}></rect>
+          <rect x={{washx}} y={{washy}} width={{washw}} height={{washl}}></rect>
+          <rect x={{entx}} y={{enty}} width={{entw}} height={{entl}}></rect>
+          <rect x={{parx}} y={{pary}} width={{parw}} height={{parl}}></rect>
+          <rect x={{garx}} y={{gary}} width={{garw}} height={{garl}}></rect>
+          <rect x={{foyx}} y={{foyy}} width={{foyw}} height={{foyl}}></rect>
+          <rect x={{utix}} y={{utiy}} width={{utiw}} height={{util}}></rect>
+          
+        </svg>
+        
+          
+    </div>
+    
+    </div>
+  </div>  
+{% endblock %}

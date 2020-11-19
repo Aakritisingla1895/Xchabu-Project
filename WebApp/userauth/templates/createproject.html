@@ -1,0 +1,211 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block navbar %}
+<div class="brandlogo">
+  <img src="{% static 'logo.png'%}" alt="logo" style="height: 50px; width: 50px;"/>
+</div>
+<div class="menulines" onclick="openNav()">
+ <span>&#9776;</span>
+</div>
+<ul style="padding-left: 50%;" >
+<li><a>{{date|time:"H:i:s"}}</a></li>
+{% for raw in udata%}
+<li><a href="#">Hello , {{raw.name}}</a></li>
+{% endfor %}
+<li ><a href="/logout">Logout</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<style>
+  .form-group{
+    border:  2px solid orangered; 
+    width: 40%; 
+    padding-left: 7%;
+    margin-left: 30%; 
+    margin-top: 3%;
+     padding-top: 3%; 
+    padding-bottom: 5%;
+  }
+  h4{
+    font-weight: 800;
+    color: #203864;
+    font-family: sans-serif;
+    padding-left: 15%;
+   padding-bottom: 3%;
+  }
+  .icon{
+    font-size: 25px;
+    color: orangered;
+  }
+  select{
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid orangered;
+    box-shadow: none;
+    padding-left: 15%;
+  }
+  .amenities i{
+    font-size: 25px;
+    color: orangered;
+  }
+  .amenities{
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding-left: 2px;
+  }
+  .row{
+    padding-left: 5%;
+  }
+  .left{
+    padding-left: 8%;
+  }
+  .right{
+    padding-left: 80px;
+  }
+  .form-button{
+    padding-left: 20%;
+    padding-top: 2%;
+  }
+  .form-button button{
+    
+    background-color: #203864;
+     color: aliceblue;
+  }
+  .form-check{
+    padding-left: 40px;
+  }
+  #textbox i{
+    font-size: 25px;
+    color: orangered;
+    padding-top: 8px;
+    margin-right: 1%;
+  }
+  #textbox input{
+    width: 120px;
+    border: none;
+    border-bottom: 2px solid orangered;
+    box-shadow: none;
+    padding-left: 15%;
+    font-weight: 500;
+    color: black;
+    font-family: sans-serif;
+
+  }
+
+</style>
+  <form  method="POST">
+    {% csrf_token %}
+    <div class="form-group" >
+      <h4 class="h">Create Project</h4>
+      {% if messages %}
+      {% for msg in messages %}
+      <p class="text-danger text-center" style="padding-right: 15%;">{{msg}}</p>
+      {% endfor %}
+      {% endif %}
+      <br/>
+      <label class="icon"><i class="fa fa-home"  aria-hidden="true"></i></label>
+      <select name="firstname">
+        <option>Enter House Type</option>
+        <option>1 BHK</option>
+        <option>2 BHK</option>
+        <option>3 BHK</option>
+        <option>4 BHK</option>
+        <option>5 BHK</option>
+      </select>
+      <br/>
+      <label class="icon"><i class="fa fa-building" aria-hidden="true"></i></label>
+      <select name="ftype" >
+        <option value="">Enter Floor Type</option>
+        <option>1 Floor</option>
+        <option>2 Floor</option>
+        <option>3 Floor</option>
+        <option>4 Floor</option>
+        <option>5 Floor</option>
+      </select>
+      <br/>
+      <label class="icon"><i class="fa fa-exchange" aria-hidden="true"></i></label>
+      <select name="direction" >
+        <option value="">House Facing Direction</option>
+        <option>East </option>
+        <option>West</option>
+        <option>North</option>
+        <option>South</option>
+      </select>
+      <br/>
+      <div class="row" id="textbox">
+        <i class="fa fa-cubes" aria-hidden="true"></i>
+        <div class="col-4">
+          <input type="text" class="form-control" name="height" placeholder="length">
+        </div>
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <div class="col-4">
+          <input type="text" class="form-control" name="width" placeholder="Width">
+        </div>
+      </div>
+      
+      <br/>
+      <label class="amenities"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Vastu</label><br/>        
+      <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" name="yes" checked="checked" value="True">
+          <label class="form-check-label" for="gender">Yes</label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" name="no"  value="True">
+          <label class="form-check-label" for="gender">No</label>
+        </div>
+      <br/>
+      <label class="amenities"> <i class="fa fa-bath" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Amenities</label>
+      <div class="row" >
+        <div class="left">  
+          <input type="checkbox" name="ots" value="True">
+          <label for="amenities"> OTS</label><br>
+          <input type="checkbox" name="store" value="True">
+          <label for="amenities">Store</label><br>
+          <input type="checkbox" name="garden" value="True" >
+          <label for="amenities">Garden</label><br>
+          <input type="checkbox" name="temple" value="True" >
+          <label for="amenities"> Temple</label><br><br>
+
+        </div>
+        
+        <div class="right">
+          <input type="checkbox" name="parking" value="True">
+          <label for="amenities"> Parking</label><br>
+          <input type="checkbox" name="washarea" value="True">
+          <label for="amenities"> wash Area</label><br>
+          <input type="checkbox" name="dressingroom" value="True" >
+          <label for="amenities"> Dressing room</label><br>
+          <input type="checkbox" name="utility" value="True" >
+          <label for="amenities"> Utility</label><br><br>
+
+
+        </div>
+      </div>
+      <div class="form-button">
+        <button type="submit" class="btn" >Create Project</button>
+      </div>
+
+    </div>
+  </form>
+
+  <script>
+
+    $(document).ready(function() {
+    $('.btn').on('click', function() {
+    var $this = $(this);
+    var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i>Generaing Layout...';
+    if ($(this).html() !== loadingText) {
+      $this.data('original-text', $(this).html());
+      $this.html(loadingText);
+    }
+    setTimeout(function() {
+      $this.html($this.data('original-text'));
+    }, 5000);
+    });
+    })
+  </script>
+  
+{% endblock %}

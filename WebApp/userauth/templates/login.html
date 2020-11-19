@@ -1,0 +1,71 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <title>xChabu</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 side-div">
+                <img src="{% static 'images/signin-image.jpg'%}">
+                
+                    
+                </div>
+            {{ form|crispy }}
+            <div class="col-6 top-div" style="background-color: white; border: 2px solid orangered;">
+             <h2 class="form-title" style="color: navy; font-family: Georgia, 'Times New Roman', Times, serif;"><b>Sign In</b></h2>
+             <form  class="register-form" method="POST" action="/" onsubmit="return validation()">
+                {% csrf_token %}
+                 
+                     {% if messages %}
+                     {% for msg in messages %}
+                     <p class="text-danger text-center" style="padding-right: 15%;">{{msg}}</p>
+                     {% endfor %}
+                     {% endif %}
+                     <input type="hidden" name="id" value="" id = "id"/>
+                 <div class="col-sm-10 form-group">
+                     <span><i class="fa fa-envelope" aria-hidden="true" style="color: orangered;"></i></span>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"autocomplete="off"/>
+              
+               </div>
+               
+               
+                <div class="col-sm-10 form-group">
+                    <span><i class="fa fa-lock" aria-hidden="true" style="color: orangered;"></i></span>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Your Password" autocomplete="off"/>
+                
+                    </div>
+                    <div class=" col-sm-10 form-button" style="color: navy;">
+                        <input type="submit" class="btn" name="signup" id="signup" class="form-submit" value="Log In" style="background-color: navy; color: white; font-family: 'Times New Roman', Times, serif;"/>
+                    </div>    
+
+                    <div class="col-sm-10 text-center " style="padding-top: 3%;">
+                        <a href="/sign-up" style="color: navy;"><u>Create an Account</u></a>
+                        <code>|</code>
+                        <a href="{% url 'forgot_password' %}" style="color: navy;"><u>Forget Password</u></a>
+                    </div>
+                
+
+             </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

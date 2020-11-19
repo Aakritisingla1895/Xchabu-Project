@@ -1,0 +1,127 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!------- CSS for dashboard-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    
+    <div id="navbar" style="padding-top: 1%;">
+      {% block navbar %}
+        <div class="brandlogo">
+            <img src="{% static 'xchabu.png'%}" alt="logo" style="height: 50px; width: 50px;"/>
+        </div>
+        <div class="menulines" onclick="openNav()">
+           <span>&#9776;</span>
+        </div>
+        <ul style="padding-left: 55%;" >
+
+          <li><a>{{date|time:"H:i:s"}}</a></li>
+          <li><a href="#">Hello , {{udata.name}}</a></li>
+          <li ><a href="/logout">Logout</a></li>
+        </ul>
+        {% endblock %}
+        </div>
+
+        
+        
+      
+        {% block sidebar %} 
+        <div id="sidebar">
+       
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/create_project/{{udata.id}}"> <i class="fa fa-file" aria-hidden="true"></i> New project </a>
+        <a href="#"> <i class="fa fa-spinner" aria-hidden="true"></i>Load Project </a>
+        <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> View Project </a>
+        <a href="#"> <i class="fa fa-paper-plane" aria-hidden="true"></i> Previous Layout </a>
+        
+       
+    </div>
+    {% endblock %}
+    {% block content%}
+
+
+    <div class="row" style=" column-gap: 40px; justify-content: center ; padding-top: 5%;">
+
+      
+        <div class="card" style=" column-gap: 40px; width: 200px; height:10%;display: flex; justify-content: space-between;">
+          <div class="card-body" style="column-gap: 40px; border: 1px solid orangered; width: 200px; opacity: 1.5;" >
+            <center>
+              <h5 class="card-title">New Project</h5>
+              <a href="/create_project/{{udata.id}}" class="btn btn-primary">New Project</a>
+            </center>
+          </div>
+        </div>
+      
+      
+        <div class="card" style=" column-gap: 40px; width: 200px; height:10%;display: flex; justify-content: space-between;">
+          <div class="card-body" style="column-gap: 40px; border: 1px solid orangered; width: 200px; opacity: 1.5;" >
+            <center>
+              <h5 class="card-title">Load Project</h5>
+              <a href="#" class="btn btn-primary">Load Project</a>
+            </center>
+            
+          </div>
+        </div>
+
+        <div class="card" style="width: 200px; height:10%;display: flex; justify-content: space-between;">
+          <div class="card-body" style="border: 1px solid orangered; width: 200px; opacity: 1.5;" >
+
+            <center>
+              <h5 class="card-title">View Project</h5>
+              <a href="#" class="btn btn-primary">View Project</a>
+            </center>
+            
+          </div>
+        </div>
+
+        <div class="card" style="width: 200px; height:10%;display: flex; justify-content: space-between;">
+          <div class="card-body" style="border: 1px solid orangered; width: 200px; opacity: 1.5;" >
+            <center>
+              <h5 class="card-title">Previous Layout</h5>
+              <a href="#" class="btn btn-primary">Previous Layout</a>
+            </center>
+           
+          </div>
+        </div>
+
+        
+      
+    </div>
+
+    
+    {% endblock %}
+   
+  
+   <div id="footer" style="text-align: center; padding: center;"> 
+    <p>All right reserved<a href="#">   xChabu</a></p>
+   </div>
+   <script>
+    const openNav = () =>{
+       document.getElementById('sidebar').style.width = "300px";
+    }
+    const closeNav = () =>{
+       document.getElementById('sidebar').style.width = "0";
+        }
+    </script>
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

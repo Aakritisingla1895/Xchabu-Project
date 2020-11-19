@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+<div class="brandlogo">
+  <img src="{% static 'logo.png'%}" alt="logo" style="height: 50px; width: 50px;"/>
+</div>
+<ul style="padding-left: 55%;" >
+<li><a href="#">Forget Password</a></li>
+<li><a>{{date|time:"H:i:s"}}</a></li>
+{% for data in  udata %}
+<li><a href="#">Hello ,{{data.name}}</a></li>
+{% endfor %}
+<li ><a href="/logout">Logout</a></li>
+</ul>
+{% endblock navbar %}
+{% comment %} {% block content %}
+<style>
+.svgdiv{
+    margin-left: 35%;
+    margin-top: 3%;
+}
+#svgrow:after {
+    content: "";
+    display: table;
+    clear: both;
+ }
+/* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+      
+    }
+ }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #f1f1f1;
+  margin-left: 20%;
+  left: 50%;
+  padding-top: 5%;
+  padding-left: 2%;
+  padding-right: 1%;
+  margin-bottom: 5%;
+}
+.cardhr{
+   background-color: black;
+}
+
+</style>
+<div class="container">
+<div class="svgdiv">
+<svg  width="320" height="480" viewBox="0 0 320 450">
+<rect x=0 y=40 height=40 width=30></rect>
+</svg>
+</div>
+<hr class="cardhr"/>
+<div class="row" id="svgrow">
+<div class="coloumn">
+<div class="card">
+<p class="text-center">
+suggested layout
+</p>
+</div>
+</div>
+<div class="coloumn">
+<div class="card">
+<p class="text-center">
+suggested layout
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock content %} {% endcomment %}
