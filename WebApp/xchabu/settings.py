@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i57r_^ftdsrlkkuk*ski7g^-*x37t&sd2hhdey%634_oz*(0qu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,7 +98,6 @@ DATABASES = {
      'room_base_data.db': {
        'NAME': os.path.join(BASE_DIR,'room_base_data.db'),
         'ENGINE': 'django.db.backends.sqlite3',
-        'TEST_NAME': os.path.join(os.path.dirname(__file__), 'room_base_data.db'),
      }
 }
 
