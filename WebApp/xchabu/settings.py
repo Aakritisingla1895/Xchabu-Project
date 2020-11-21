@@ -83,22 +83,14 @@ WSGI_APPLICATION = 'xchabu.wsgi.application'
 
 
 DATABASES = {
-     'default': {
-         'NAME': os.path.join(BASE_DIR,'room.db'),
-         'ENGINE': 'django.db.backends.sqlite3',
-     },
-     'door.db': {
-         'NAME': os.path.join(BASE_DIR,'door.db'),
-         'ENGINE': 'django.db.backends.sqlite3',
-     },
-     'wall.db': {
-         'NAME': os.path.join(BASE_DIR,'wall.db'),
-         'ENGINE': 'django.db.backends.sqlite3',
-     }, 
-     'room_base_data.db': {
-       'NAME': os.path.join(BASE_DIR,'room_base_data.db'),
-        'ENGINE': 'django.db.backends.sqlite3',
-     }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': '-',
+    'USERNAME': 'xchabu-database',
+    'PASSWORD': 'xchabu1895',
+    'HOST': 'xchabu-database.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
+    'PORT': '5432',
+   }
 }
 
 DATABASE_ROUTERS = ['userauth.database_router.DemoRouter']
@@ -141,11 +133,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = 'userauth/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (     
-os.path.join(BASE_DIR, 'userauth/static'), 
+os.path.join(BASE_DIR, 'static'), 
 ) 
-STATIC_ROOT = os.path.join(BASE_DIR, 'userauth/staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
