@@ -96,7 +96,6 @@ DATABASES = {
 DATABASE_ROUTERS = ['userauth.database_router.DemoRouter']
 DATABASE_APPS_MAPPING = {'room_base_data':'room_base_data','door.db': 'door.db','wall.db':'wall.db'}
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -128,7 +127,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
