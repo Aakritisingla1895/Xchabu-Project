@@ -55,6 +55,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'xchabu.urls'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',    #causes verbose duplicate notifications in django 1.9
+)
+
 
 TEMPLATES = [
     {
@@ -85,10 +90,10 @@ WSGI_APPLICATION = 'xchabu.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': '-',
-    'USERNAME': 'xchabu-database',
-    'PASSWORD': 'xchabu1895',
-    'HOST': 'xchabu-database.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
+    'NAME': 'xchabudb',
+    'USER': 'xchabudb',
+    'PASSWORD': 'xchabupassword',
+    'HOST': 'xchabudb.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
     'PORT': '5432',
    }
 }

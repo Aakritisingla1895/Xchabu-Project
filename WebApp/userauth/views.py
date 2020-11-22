@@ -11,10 +11,6 @@ from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.db import connection
-import cv2
-import pdb
-import numpy as np
-import pandas as pd
 from django.urls import reverse
 import sqlite3 as db
 
@@ -229,7 +225,7 @@ def createproject(request,id=id):
               #layout_no1 = TreebankWordDetokenizer().detokenize(layout_no).replace(" ", "").strip()
               #print(type(layout_no1))
               #connecting to sqlite database for backend connectivity
-              conn = db.connect('room_base_data.db')
+              conn = db.connect('D:\Work\Xchabu Project\Project Code/room_base_data.db')
               cur = conn.cursor()
               sql_query2 = 'SELECT layoutno from {} '.format(user_direction)
               layout_list = cur.execute(sql_query2).fetchall()

@@ -1,0 +1,55 @@
+  .container{
+    margin-left: 30%;
+    
+    width: 800px;
+
+  }
+  form{
+    
+    margin-left: 10%;
+    border: 1px solid orangered;
+    padding-left: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+  .form-group{
+  
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  }
+  .form-control-lg{
+   border: none;
+   border-bottom: 1px solid orangered;
+  }
+  .form-group select{
+    letter-spacing: 1px;
+    font-size: 15px;
+    padding-left: 60px;
+    left: 10%;
+    background: transparent;
+    padding-bottom: 0;
+    color: #203864;
+    
+  }
+  .form-group i{
+    overflow: hidden;
+    font-size: 25px;
+    color: #203864;
+    
+  }
+  .form-button{
+    padding-left: 20%;
+  }
+  .form-button a{
+    background-color: #203864;
+    color: aliceblue;
+  }
+  
+  .card-custom {
+        max-width: 200px;
+        height: 180px;
+        border: 1px solid orangered;
+    }
+    .card-custom p{
+      padding-top: 50%;
+    }

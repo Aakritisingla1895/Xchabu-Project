@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box;
+}
+#navbar{
+    border: 2px solid orangered;
+    height: 70px;
+    width: 100%;
+    display: flex ; justify-content:  left;
+
+}
+.brandlogo{
+    padding-left: 50px;
+}
+.menulines{
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 50px;
+    color: orangered;
+    padding-left: 50px;
+}
+ul{
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  
+  
+}
+li {
+    float: left;
+    
+  }
+  
+  li a {
+    display: block;
+    text-align: right;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #203864;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+  }
+  
+
+  
+#footer{
+    border: 2px solid orangered;
+    height: 65px;
+    width: 100%;
+    display: flex ; justify-content:  left;
+    align-items: center;
+    clear: both;
+}
+#footer p{
+    padding-left: 40%;
+    padding-top: 2%;
+    
+}
+#section{
+    max-width: 100vh;
+    float: left;
+    padding: 50px;
+    position: relative;
+   
+}
+#sidebar{
+    border: 1px solid orangered;
+    height: 100vh;
+    width: 0;
+    position: sticky !important;
+    top: 0 !important;
+    left: 0%;
+    z-index: 1;
+    background: #203864;
+    overflow-x: hidden;
+    padding-top: 50px;
+    transition: all 0.5s;
+    float: left;
+
+}
+#sidebar a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    padding: 30px 0 30px 30px;
+}
+#sidebar a:hover{
+    color: orangered;
+}
+.closebtn{
+    position: absolute;
+    top: 0px;
+    right: 25px;
+    font-size: 35px !important;
+}
+
