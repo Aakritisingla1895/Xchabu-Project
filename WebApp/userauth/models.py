@@ -160,9 +160,9 @@ class Room(models.Model):
     ots2_yco = models.FloatField()
     bed2_xco = models.FloatField()
     bed2_yco = models.FloatField()
-
     def __str__(self):
         return str(self.bedl)
+        
 
 class South(models.Model):
     layoutno = models.TextField()

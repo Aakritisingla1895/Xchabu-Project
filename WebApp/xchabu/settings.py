@@ -86,7 +86,6 @@ WSGI_APPLICATION = 'xchabu.wsgi.application'
 
 # config/settings.py
 
-
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
@@ -95,9 +94,17 @@ DATABASES = {
     'PASSWORD': 'xchabupassword',
     'HOST': 'xchabudb.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
     'PORT': '5432',
+   }, 
+
+   'xchaburoom': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'xchaburoom',
+    'USER': 'xchaburoom',
+    'PASSWORD': 'xchabupassword',
+    'HOST': 'xchaburoom.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
+    'PORT': '5432',
    }
 }
-
 DATABASE_ROUTERS = ['userauth.database_router.DemoRouter']
 DATABASE_APPS_MAPPING = {'room_base_data':'room_base_data','door.db': 'door.db','wall.db':'wall.db'}
 
