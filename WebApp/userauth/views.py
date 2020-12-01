@@ -223,6 +223,7 @@ def createproject(request,id=id):
                 #print (type(layout_no))
                 print (layout_no)
 
+<<<<<<< HEAD
               
               connection = psycopg2.connect(
               host = 'xchaburoom.cmpbnicytdnf.us-east-2.rds.amazonaws.com',
@@ -276,6 +277,34 @@ def createproject(request,id=id):
               suggested_layout_list = []
 
               layout_list1 = list(sum(layout_list, ()))
+=======
+    
+              #layout_no1 = TreebankWordDetokenizer().detokenize(layout_no).replace(" ", "").strip()
+              #print(type(layout_no1))
+              #connecting to sqlite database for backend connectivity
+              conn = db.connect('D:/Work/Xchabu Project/Project Code/room_latest.db')
+              cur = conn.cursor()
+              sql_query2 = 'SELECT layoutno from {} '.format(user_direction)
+              layout_list = cur.execute(sql_query2).fetchall()
+              layout_list1 = list(sum(layout_list, ()))
+
+
+              conn_wall = db.connect('D:/Work/Xchabu Project/Project Code/wall.db')
+              cur_wall = conn_wall.cursor()
+              sql_query_wall = 'SELECT layoutno from {} '.format(user_direction)
+              wall_list = cur_wall.execute(sql_query_wall).fetchall()
+              print (wall_list)
+
+
+              conn_door = db.connect('D:/Work/Xchabu Project/Project Code/door.db')
+              cur_door = conn_door.cursor()
+              sql_query_door = 'SELECT layoutno from {} '.format(user_direction)
+              door_list = cur_door.execute(sql_query_door).fetchall()
+              print (door_list)
+
+
+
+>>>>>>> 5c4b5a8e0239e8d3b24d557c7fb679cfe6f65de1
               from difflib import get_close_matches
 
               match1 = get_close_matches(layout_no, layout_list1)
@@ -303,6 +332,7 @@ def createproject(request,id=id):
               print (sq1_data)
 
 
+<<<<<<< HEAD
               door_data2 = door_cursor.execute(sql_query1)
               door_data = door_cursor.fetchall()
               #print(door_data)
@@ -311,6 +341,22 @@ def createproject(request,id=id):
               wall_data2 = wall_cursor.execute(sql_query1)
               wall_data = wall_cursor.fetchall()
               #print(wall_data)
+=======
+              x1 = random.choice(match1)
+                
+              sql_query1 = 'SELECT * from {} where layoutno = ? '.format(user_direction)
+              
+              
+              #data = cur.execute('SELECT * from %s where layoutno = "1B2TW"', [user_direction]).fetchall() #passing sql query to specific row of sepcif database
+              
+              #tup1 = (user_direction, layout_no1)
+              room_data = cur.execute(sql_query1, (x12,)).fetchall()
+              wall_data = cur_wall.execute(sql_query1, (x12,)).fetchall()
+              door_data = cur_door.execute(sql_query1, (x12,)).fetchall()
+              print(door_data)
+              
+              #print(room_data)
+>>>>>>> 5c4b5a8e0239e8d3b24d557c7fb679cfe6f65de1
 
               ratio = 10
               room_list = []
@@ -397,6 +443,9 @@ def createproject(request,id=id):
                 room_list.append(item)
                 #print (room_list)
 
+                
+
+
                 # coordinates for text
                 bed_xco = bedx + (bedw/4)
                 bed_yco = bedy + (bedl/3)
@@ -439,6 +488,7 @@ def createproject(request,id=id):
                 ent_xco = entx + (entw/4)      #  text coordinates for ENTRY
                 ent_yco = enty + (entl/3)
                 
+<<<<<<< HEAD
                 for d in door_data:
 
                   dbedl = (eval(d[1])*10)
@@ -722,6 +772,169 @@ def createproject(request,id=id):
                   ent_xco = entx + (entw/4)      #  text coordinates for ENTRY
                   ent_yco = enty + (entl/3)
   
+=======
+                for w in wall_data:
+
+                  wbedl = w[1]*ratio
+                  wbedw = w[2]*ratio
+                  wbedx = w[3]*ratio
+                  wbedy = w[4]*ratio
+                  wkitl = w[5]*ratio
+                  wkitw = w[6]*ratio
+                  wkitx = w[7]*ratio
+                  wkity = w[8]*ratio
+                  wtoil = w[9]*ratio
+                  wtoiw = w[10]*ratio
+                  wtoix = w[11]*ratio
+                  wtoiy = w[12]*ratio
+                  wdrawl = w[13]*ratio
+                  wdraww = w[14]*ratio
+                  wdarwx = w[15]*ratio
+                  wdrawy = w[16]*ratio
+                  wstal = w[17]*ratio
+                  wstaw = w[18]*ratio
+                  wstax = w[19]*ratio
+                  wstay = w[20]*ratio
+                  wdinl = w[21]*ratio
+                  wdinw = w[22]*ratio
+                  wdinx = w[23]*ratio
+                  wdiny = w[24]*ratio
+                  wctoil = w[25]*ratio
+                  wctoiw = w[26]*ratio
+                  wctoix = w[27]*ratio
+                  wctoiy = w[28]*ratio
+                  wstol = w[29]*ratio
+                  wstow = w[30]*ratio
+                  wstox = w[31]*ratio
+                  wstoy = w[32]*ratio
+                  wotsl = w[33]*ratio
+                  wotsw = w[34]*ratio
+                  wotsx = w[35]*ratio
+                  wotsy = w[36]*ratio
+                  wwashl = w[37]*ratio
+                  wwashw = w[38]*ratio
+                  wwashx = w[39]*ratio
+                  wwashy = w[40]*ratio
+                  wentl = w[41]*ratio
+                  wentw = w[42]*ratio
+                  wentx = w[43]*ratio
+                  wenty = w[44]*ratio
+                  wparl = w[45]*ratio
+                  wparw = w[46]*ratio
+                  wparx = w[47]*ratio
+                  wpary = w[48]*ratio
+                  wgarl = w[49]*ratio
+                  wgarw = w[50]*ratio
+                  wgarx = w[51]*ratio
+                  wgary = w[52]*ratio
+                  wfoyl = w[53]*ratio
+                  wfoyw = w[54]*ratio
+                  wfoyx = w[55]*ratio
+                  wfoyy = w[56]*ratio
+                  wutil = w[57]*ratio
+                  wutiw = w[58]*ratio
+                  wutix = w[59]*ratio
+                  wutiy = w[60]*ratio
+                  wsto2l = w[61]*ratio
+                  wsto2w = w[62]*ratio
+                  wsto2x = w[63]*ratio
+                  wsto2y = w[64]*ratio
+                  wbed2l = w[65]*ratio
+                  wbed2w = w[66]*ratio
+                  wbed2x = w[67]*ratio
+                  wbed2y = w[68]*ratio
+                  wemptyl = w[69]*ratio
+                  wemptyw = w[70]*ratio
+                  wemptyx = w[71]*ratio
+                  wemptyy = w[72]*ratio
+                  wots2l = w[73]*ratio
+                  wots2w = w[74]*ratio
+                  wots2x = w[75]*ratio
+                  wots2y = w[76]*ratio
+
+
+                for d in door_data:
+
+                  dbedl = d[1]*ratio
+                  dbedw = d[2]*ratio
+                  dbedx = d[3]*ratio
+                  dbedy = d[4]*ratio
+                  dkitl = d[5]*ratio
+                  dkitw = d[6]*ratio
+                  dkitx = d[7]*ratio
+                  dkity = d[8]*ratio
+                  dtoil = d[9]*ratio
+                  dtoiw = d[10]*ratio
+                  dtoix = d[11]*ratio
+                  dtoiy = d[12]*ratio
+                  ddrawl = d[13]*ratio
+                  ddraww = d[14]*ratio
+                  ddarwx = d[15]*ratio
+                  ddrawy = d[16]*ratio
+                  dstal = d[17]*ratio
+                  dstaw = d[18]*ratio
+                  dstax = d[19]*ratio
+                  dstay = d[20]*ratio
+                  ddinl = d[21]*ratio
+                  ddinw = d[22]*ratio
+                  ddinx = d[23]*ratio
+                  ddiny = d[24]*ratio
+                  dctoil = d[25]*ratio
+                  dctoiw = d[26]*ratio
+                  dctoix = d[27]*ratio
+                  dctoiy = d[28]*ratio
+                  dstol = d[29]*ratio
+                  dstow = d[30]*ratio
+                  dstox = d[31]*ratio
+                  dstoy = d[32]*ratio
+                  dotsl = d[33]*ratio
+                  dotsw = d[34]*ratio
+                  dotsx = d[35]*ratio
+                  dotsy = d[36]*ratio
+                  dwashl = d[37]*ratio
+                  dwashw = d[38]*ratio
+                  dwashx = d[39]*ratio
+                  dwashy = d[40]*ratio
+                  dentl = d[41]*ratio
+                  dentw = d[42]*ratio
+                  dentx = d[43]*ratio
+                  denty = d[44]*ratio
+                  dparl = d[45]*ratio
+                  dparw = d[46]*ratio
+                  dparx = d[47]*ratio
+                  dpary = d[48]*ratio
+                  dgarl = d[49]*ratio
+                  dgarw = d[50]*ratio
+                  dgarx = d[51]*ratio
+                  dgary = d[52]*ratio
+                  dfoyl = d[53]*ratio
+                  dfoyw = d[54]*ratio
+                  dfoyx = d[55]*ratio
+                  dfoyy = d[56]*ratio
+                  dutil = d[57]*ratio
+                  dutiw = d[58]*ratio
+                  dutix = d[59]*ratio
+                  dutiy = d[60]*ratio
+                  dsto2l = d[61]*ratio
+                  dsto2w = d[62]*ratio
+                  dsto2x = d[63]*ratio
+                  dsto2y = d[64]*ratio
+                  dbed2l = d[65]*ratio
+                  dbed2w = d[66]*ratio
+                  dbed2x = d[67]*ratio
+                  dbed2y = d[68]*ratio
+                  demptyl = d[69]*ratio
+                  demptyw = d[70]*ratio
+                  demptyx = d[71]*ratio
+                  demptyy = d[72]*ratio
+                  dots2l = d[73]*ratio
+                  dots2w = d[74]*ratio
+                  dots2x = d[75]*ratio
+                  dots2y = d[76]*ratio
+                
+                
+ 
+>>>>>>> 5c4b5a8e0239e8d3b24d557c7fb679cfe6f65de1
                 
 
                 # for layout 1 optional amenities, looping condition............................
@@ -1021,6 +1234,7 @@ def createproject(request,id=id):
                   "ent_xco":ent_xco, "ent_yco":ent_yco, "ent_fill":ent_fill, "par_fill":par_fill, "par_xco":par_xco, "par_yco":par_yco,
                   "gar_fill":gar_fill, "gar_xco":gar_xco, "gar_yco":gar_yco, "foy_fill":foy_fill, "foy_xco":foy_xco, "foy_yco":foy_yco, "uti_xco":uti_xco, "uti_yco":uti_yco, "uti_fill":uti_fill,
                   "sto2_fill":sto2_fill, "sto2_xco":sto2_xco, "sto2_yco":sto2_yco,"ots2_xco":ots2_xco,"ots2_yco":ots2_yco, "ots2_fill":ots2_fill,
+<<<<<<< HEAD
                   "bed2_xco":bed2_xco,"bed2_yco":bed2_yco, "bed2_fill":bed2_fill,"wash_fill":wash_fill, "layout_one":layout_one,
 
 
@@ -1040,6 +1254,10 @@ def createproject(request,id=id):
 
                   
 				          "wbedl":wbedl, "wbedw":wbedw, "wbedx":wbedx, "wbedy":wbedy, "wkitl":wkitl, "wkitw":wkitw, "wkitx":wkitx, "wkity":wkity,
+=======
+                  "bed2_xco":bed2_xco,"bed2_yco":bed2_yco, "bed2_fill":bed2_fill,"wash_fill":wash_fill,
+                  "wbedl":wbedl, "wbedw":wbedw, "wbedx":wbedx, "wbedy":wbedy, "wkitl":wkitl, "wkitw":wkitw, "wkitx":wkitx, "wkity":wkity,
+>>>>>>> 5c4b5a8e0239e8d3b24d557c7fb679cfe6f65de1
                   "wtoil":wtoil, "wtoiw":wtoiw, "wtoix":wtoix , "wtoiy":wtoiy, "wdrawl":wdrawl, "wdraww":wdraww, "wdrawx":wdarwx, "wdrawy":wdrawy,
                   "wstal":wstal, "wstaw":wstaw, "wstax":wstax, "wstay":wstay, "wdinl":wdinl, "wdinw":wdinw, "wdinx":wdinx, "wdiny":wdiny,
                   "wctoil":wctoil, "wctoiw":wctoiw, "wctoix":wctoix, "wctoiy":wctoiy, "wstol":wstol, "wstow":wstow, "wstox":wstox, "wstoy":wstoy,
@@ -1050,6 +1268,7 @@ def createproject(request,id=id):
                   "wsto2l":wsto2l, "wsto2w":wsto2w, "wsto2x":wsto2x, "wsto2y":wsto2y, "wbed2l":wbed2l, "wbed2w":wbed2w, "wbed2x":wbed2x, "wbed2y":wbed2y, 
                   "wemptyl":wemptyl, "wemptyw":wemptyw, "wemptyx":wemptyx, "wemptyy":wemptyy, "wots2l":wots2l,"wots2w":wots2w, "wots2x":wots2x, "wots2y":wots2y,
 
+<<<<<<< HEAD
                   
                   "s1_bedl":s1_bedl, "s1_bedw":s1_bedw, "s1_bedx":s1_bedx, "s1_bedy":s1_bedy, "s1_kitl":s1_kitl, "s1_kitw":s1_kitw, "s1_kitx":s1_kitx, 
                   "s1_kity":s1_kity, "s1_toil":s1_toil, "s1_toiw":s1_toiw, "s1_toix":s1_toix, "s1_toiy":s1_toiy, "s1_drawl":s1_drawl, "s1_draww":s1_draww,
@@ -1077,6 +1296,22 @@ def createproject(request,id=id):
                   
                   
                   "data1": userdata3, "store":store, "ots": ots, "parking":parking,"washarea":washarea, "dressingroom":dressingroom, "utility":utility, "temple":temple, "garden":garden,
+=======
+
+                  "dbedl":dbedl, "dbedw":dbedw,"dbedx":dbedx, "dbedy":dbedy,"dkitl":dkitl, "dkitw":dkitw,"dkitx":dkitx,
+                  "dkity":dkity, "dtoil":dtoil, "dtoiw":dtoiw, "dtoiy":dtoiy, "ddrawl":ddrawl, "ddraww":ddraww, "ddrawy":ddrawy,
+                  "dstal":dstal, "dstaw":dstaw, "dstax":dstax, "dstay":dstay, "ddinl":ddinl,"ddinw":ddinw, "ddinx":ddinx,
+                  "ddiny":ddiny, "dctoil":dctoil,"dctoiw":dctoiw,"dctoix":dctoix, "dctoiy":dctoiy, "dstol":dstol, "dstow":dstow, "dstox":dstox, "dstoy":dstoy,
+                  "dotsl":dotsl, "dotsw":dotsw, "dotsx":dotsx, "dotsy":dotsy, "dwashl":dwashl, "dwashw":dwashw, "dwashx":dwashx,"dwashy":dwashy,
+                  "dentl":dentl, "dentw":dentw, "dentx":dentx, "denty":denty, "dparl":dparl, "dparw":dparw, "dparx":dparx, "dpary":dpary,
+                  "dgarl":dgarl, "dgarw":dgarw, "dgarx":dgarx, "dgary":dgary, "dfoyl":dfoyl, "dfoyw":dfoyw, "dfoyx":dfoyx, "dfoyy":dfoyy, 
+
+                  "dutil":dutil, "dutiw":dutiw, "dutix":dutix, "dutiy":dutiy, "dsto2l":dsto2l, "dsto2w":dsto2w, "dsto2x":dsto2x, "dsto2y":dsto2y,
+                  "dbed2l":dbed2l, "dbed2w":dbed2w, "dbed2x":dbed2x, "dbed2y":dbed2y, "demptyl":demptyl, "demptyw":demptyw, "demptyx":demptyx, "demptyy":demptyy,
+                  "dots2l":dots2l, "dots2w":dots2w, "dots2x":dots2x, "dots2y":dots2y,
+                  
+                  "forms1":userdata3, "data1": data, "store":store, "ots": ots, "parking":parking,"washarea":washarea, "dressingroom":dressingroom, "utility":utility, "temple":temple, "garden":garden,
+>>>>>>> 5c4b5a8e0239e8d3b24d557c7fb679cfe6f65de1
                   "match1": match1,
                 }  
 
